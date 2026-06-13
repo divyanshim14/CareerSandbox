@@ -1,0 +1,8 @@
+node_modules/
+server/node_modules/
+server/careersandbox.db
+package-lock.json
+*.log
+.env
+.DS_Store
+Thumbs.db
