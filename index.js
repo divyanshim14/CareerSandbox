@@ -2,15 +2,28 @@
 const express = require('express');
 const cors    = require('cors');
 const path    = require('path');
+const fs      = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const { initDB, run, get, all } = require('./db');
 
 const app  = express();
 const PORT = process.env.PORT || 3001;
 
+// ── Frontend path ──────────────────────────────────────────
+// index.js lives at the REPO ROOT alongside index.html.
+// __dirname IS the frontend folder — no need to go up with '..'.
+// process.cwd() is used as a reliable fallback for cloud environments.
+const FRONTEND_PATH = fs.existsSync(path.join(__dirname, 'index.html'))
+  ? __dirname
+  : process.cwd();
+
+console.log('[static] __dirname     :', __dirname);
+console.log('[static] FRONTEND_PATH :', FRONTEND_PATH);
+console.log('[static] index.html    :', fs.existsSync(path.join(FRONTEND_PATH, 'index.html')));
+
 app.use(cors({ origin: '*' }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '..')));
+app.use(express.static(FRONTEND_PATH, { index: 'index.html' }));
 
 // ── Logic Helpers ─────────────────────────────────────────────
 function ensureUser(userId) {
@@ -215,12 +228,34 @@ app.get('/api/dashboard/:userId', (req, res) => {
   }
 });
 
+// ── Explicit HTML page routes (ensures Railway always serves them) ──
+const HTML_PAGES = { '/': 'index.html', '/profile': 'profile.html',
+  '/recommendations': 'recommendations.html', '/simulation': 'simulation.html',
+  '/results': 'results.html' };
+Object.entries(HTML_PAGES).forEach(([route, file]) => {
+  app.get(route, (req, res) => res.sendFile(path.join(FRONTEND_PATH, file)));
+  // Also serve with explicit .html extension
+  if (route !== '/') app.get(route + '.html', (req, res) => res.sendFile(path.join(FRONTEND_PATH, file)));
+});
+// /index.html explicit alias
+app.get('/index.html', (req, res) => res.sendFile(path.join(FRONTEND_PATH, 'index.html')));
+
+// ── Catch-all: serve index.html for any unmatched non-API route ──
+app.use((req, res, next) => {
+  if (req.method === 'GET' && !req.path.startsWith('/api/')) {
+    const f = path.join(FRONTEND_PATH, 'index.html');
+    if (fs.existsSync(f)) return res.sendFile(f);
+  }
+  next();
+});
+
 // ── Start ─────────────────────────────────────────────────────
 initDB().then(() => {
   app.listen(PORT, () => {
-    console.log(`\n🧪 CareerSandbox API → http://localhost:${PORT}`);
-    console.log(`   Health: http://localhost:${PORT}/api/health`);
-    console.log(`   App:    http://localhost:${PORT}/index.html\n`);
+    console.log(`\n🚀 CareerSandbox is live on port ${PORT}`);
+    console.log(`   Health : http://localhost:${PORT}/api/health`);
+    console.log(`   App    : http://localhost:${PORT}/`);
+    console.log(`   Serving: ${FRONTEND_PATH}\n`);
   });
 }).catch(err => {
   console.error('Failed to initialize database:', err);

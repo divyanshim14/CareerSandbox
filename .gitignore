@@ -1,6 +1,5 @@
 node_modules/
-server/node_modules/
-server/careersandbox.db
+careersandbox.db
 package-lock.json
 *.log
 .env
