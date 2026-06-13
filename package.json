@@ -1,0 +1,16 @@
+{
+  "name": "careersandbox-server",
+  "version": "1.0.0",
+  "description": "CareerSandbox backend – Node.js + Express + SQLite",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "sql.js": "^1.11.0",
+    "cors": "^2.8.5",
+    "uuid": "^9.0.0"
+  }
+}

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build Your Profile – CareerSandbox</title>
+  <meta name="description" content="Tell us about yourself. Build your exploration profile to get personalized career recommendations and simulations." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="profile.css" />
+</head>
+<body>
+  <div class="bg-warm" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar" role="navigation">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+          <div class="logo-mark">🧪</div>
+          CareerSandbox
+        </a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="profile.html" class="active">Profile</a>
+        </div>
+        <div class="nav-right" style="display:flex;align-items:center;gap:1rem">
+          <div class="profile-progress-mini" id="profile-prog-mini" aria-label="Profile completion">
+            <div class="ppm-fill" id="ppm-fill" style="width:25%"></div>
+          </div>
+          <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">🏠 Home</a>
+    <a href="recommendations.html">🎯 Recommendations</a>
+  </div>
+
+  <main class="profile-page" id="main-content">
+    <div class="container-sm">
+
+      <!-- Step Indicator -->
+      <div class="step-indicator" id="step-indicator" role="navigation" aria-label="Form progress">
+        <div class="step active" id="si-1"><div class="step-num">1</div><div class="step-label">You</div></div>
+        <div class="step-connector" id="sc-1"></div>
+        <div class="step" id="si-2"><div class="step-num">2</div><div class="step-label">Academics</div></div>
+        <div class="step-connector" id="sc-2"></div>
+        <div class="step" id="si-3"><div class="step-num">3</div><div class="step-label">Interests</div></div>
+        <div class="step-connector" id="sc-3"></div>
+        <div class="step" id="si-4"><div class="step-num">4</div><div class="step-label">Work Style</div></div>
+      </div>
+
+      <!-- Form Container -->
+      <div class="form-shell" id="form-shell">
+
+        <!-- ── STEP 1: Identity ── -->
+        <div class="form-step" id="form-step-1">
+          <div class="fs-header">
+            <div class="fs-icon">👋</div>
+            <div>
+              <h1 class="fs-title">Nice to meet you</h1>
+              <p class="fs-sub">Let's start with the basics. Takes 30 seconds.</p>
+            </div>
+          </div>
+
+          <div class="fs-body">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="input-name">Your Name *</label>
+                <input type="text" id="input-name" class="form-input" placeholder="E.g., Arjun Sharma" autocomplete="name" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="input-year">Year of Study *</label>
+                <select id="input-year" class="form-select" required>
+                  <option value="" disabled selected>Select year</option>
+                  <option value="1">1st Year</option>
+                  <option value="2">2nd Year</option>
+                  <option value="3">3rd Year</option>
+                  <option value="4">4th Year</option>
+                  <option value="pg">Postgraduate</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="input-branch">Branch / Field of Study *</label>
+              <select id="input-branch" class="form-select" required>
+                <option value="" disabled selected>Select your branch</option>
+                <option value="cs">Computer Science / IT</option>
+                <option value="ece">Electronics &amp; Communication</option>
+                <option value="mech">Mechanical Engineering</option>
+                <option value="civil">Civil Engineering</option>
+                <option value="bba">Business Administration</option>
+                <option value="bca">BCA / MCA</option>
+                <option value="design">Design</option>
+                <option value="arts">Liberal Arts / Humanities</option>
+                <option value="science">Pure Sciences</option>
+                <option value="med">Medicine / Health Sciences</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="input-aspirations">Career Aspirations <span class="opt-tag">(optional)</span></label>
+              <textarea id="input-aspirations" class="form-textarea" placeholder="What kind of work or career do you dream about? Even vague ideas are fine — 'I want to build things people love' or 'I'm not sure yet'..."></textarea>
+            </div>
+          </div>
+
+          <div class="fs-actions">
+            <div></div>
+            <button class="btn btn-primary" id="step1-next" onclick="goToStep(2)">
+              Continue
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ── STEP 2: Academics ── -->
+        <div class="form-step hidden" id="form-step-2">
+          <div class="fs-header">
+            <div class="fs-icon">📚</div>
+            <div>
+              <h2 class="fs-title">Your Academic Life</h2>
+              <p class="fs-sub">What lights you up — or shuts you down?</p>
+            </div>
+          </div>
+
+          <div class="fs-body">
+            <div class="form-group">
+              <label class="form-label">Subjects You Enjoy ✨</label>
+              <p class="form-hint">Click all that apply</p>
+              <div class="chip-group" id="chips-enjoy">
+                <div class="chip" data-val="maths" tabindex="0" role="checkbox" aria-checked="false">Mathematics</div>
+                <div class="chip" data-val="stats" tabindex="0" role="checkbox" aria-checked="false">Statistics</div>
+                <div class="chip" data-val="cs" tabindex="0" role="checkbox" aria-checked="false">Computer Science</div>
+                <div class="chip" data-val="physics" tabindex="0" role="checkbox" aria-checked="false">Physics</div>
+                <div class="chip" data-val="chemistry" tabindex="0" role="checkbox" aria-checked="false">Chemistry</div>
+                <div class="chip" data-val="design" tabindex="0" role="checkbox" aria-checked="false">Design / Art</div>
+                <div class="chip" data-val="english" tabindex="0" role="checkbox" aria-checked="false">English / Writing</div>
+                <div class="chip" data-val="econ" tabindex="0" role="checkbox" aria-checked="false">Economics</div>
+                <div class="chip" data-val="mgmt" tabindex="0" role="checkbox" aria-checked="false">Management</div>
+                <div class="chip" data-val="psych" tabindex="0" role="checkbox" aria-checked="false">Psychology</div>
+                <div class="chip" data-val="bio" tabindex="0" role="checkbox" aria-checked="false">Biology</div>
+                <div class="chip" data-val="history" tabindex="0" role="checkbox" aria-checked="false">History / Social</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Subjects You Dislike 😤</label>
+              <p class="form-hint">Be honest — it helps narrow things down</p>
+              <div class="chip-group" id="chips-dislike">
+                <div class="chip chip-dislike" data-val="maths" tabindex="0" role="checkbox" aria-checked="false">Mathematics</div>
+                <div class="chip chip-dislike" data-val="stats" tabindex="0" role="checkbox" aria-checked="false">Statistics</div>
+                <div class="chip chip-dislike" data-val="cs" tabindex="0" role="checkbox" aria-checked="false">Computer Science</div>
+                <div class="chip chip-dislike" data-val="physics" tabindex="0" role="checkbox" aria-checked="false">Physics</div>
+                <div class="chip chip-dislike" data-val="chemistry" tabindex="0" role="checkbox" aria-checked="false">Chemistry</div>
+                <div class="chip chip-dislike" data-val="design" tabindex="0" role="checkbox" aria-checked="false">Design / Art</div>
+                <div class="chip chip-dislike" data-val="english" tabindex="0" role="checkbox" aria-checked="false">English / Writing</div>
+                <div class="chip chip-dislike" data-val="econ" tabindex="0" role="checkbox" aria-checked="false">Economics</div>
+                <div class="chip chip-dislike" data-val="mgmt" tabindex="0" role="checkbox" aria-checked="false">Management</div>
+                <div class="chip chip-dislike" data-val="psych" tabindex="0" role="checkbox" aria-checked="false">Psychology</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fs-actions">
+            <button class="btn btn-ghost" onclick="goToStep(1)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              Back
+            </button>
+            <button class="btn btn-primary" onclick="goToStep(3)">
+              Continue
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ── STEP 3: Interests ── -->
+        <div class="form-step hidden" id="form-step-3">
+          <div class="fs-header">
+            <div class="fs-icon">🎯</div>
+            <div>
+              <h2 class="fs-title">What Excites You</h2>
+              <p class="fs-sub">Beyond academics — what do you actually find interesting?</p>
+            </div>
+          </div>
+
+          <div class="fs-body">
+            <div class="form-group">
+              <label class="form-label">Your Interests 🌟</label>
+              <p class="form-hint">Select everything that resonates (no right answer)</p>
+              <div class="chip-group" id="chips-interests">
+                <div class="chip" data-val="design" tabindex="0" role="checkbox" aria-checked="false">🎨 Visual Design</div>
+                <div class="chip" data-val="coding" tabindex="0" role="checkbox" aria-checked="false">💻 Coding / Building</div>
+                <div class="chip" data-val="data" tabindex="0" role="checkbox" aria-checked="false">📊 Data &amp; Numbers</div>
+                <div class="chip" data-val="writing" tabindex="0" role="checkbox" aria-checked="false">✍️ Writing</div>
+                <div class="chip" data-val="people" tabindex="0" role="checkbox" aria-checked="false">🤝 Talking to People</div>
+                <div class="chip" data-val="strategy" tabindex="0" role="checkbox" aria-checked="false">🗺️ Strategy &amp; Planning</div>
+                <div class="chip" data-val="research" tabindex="0" role="checkbox" aria-checked="false">🔍 Research &amp; Analysis</div>
+                <div class="chip" data-val="ux" tabindex="0" role="checkbox" aria-checked="false">🧠 User Behaviour</div>
+                <div class="chip" data-val="video" tabindex="0" role="checkbox" aria-checked="false">🎬 Video &amp; Media</div>
+                <div class="chip" data-val="finance" tabindex="0" role="checkbox" aria-checked="false">💰 Finance &amp; Markets</div>
+                <div class="chip" data-val="problem" tabindex="0" role="checkbox" aria-checked="false">🧩 Problem Solving</div>
+                <div class="chip" data-val="creative" tabindex="0" role="checkbox" aria-checked="false">🌈 Creative Work</div>
+                <div class="chip" data-val="social" tabindex="0" role="checkbox" aria-checked="false">🌍 Social Impact</div>
+                <div class="chip" data-val="tech" tabindex="0" role="checkbox" aria-checked="false">⚡ New Technology</div>
+                <div class="chip" data-val="biz" tabindex="0" role="checkbox" aria-checked="false">🚀 Business &amp; Startups</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="input-more-interests">Anything else? <span class="opt-tag">(optional)</span></label>
+              <textarea id="input-more-interests" class="form-textarea" rows="3" placeholder="Hobbies, side projects, things you Googled at 2am..."></textarea>
+            </div>
+          </div>
+
+          <div class="fs-actions">
+            <button class="btn btn-ghost" onclick="goToStep(2)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              Back
+            </button>
+            <button class="btn btn-primary" onclick="goToStep(4)">
+              Continue
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ── STEP 4: Work Style ── -->
+        <div class="form-step hidden" id="form-step-4">
+          <div class="fs-header">
+            <div class="fs-icon">🧩</div>
+            <div>
+              <h2 class="fs-title">How You Like to Work</h2>
+              <p class="fs-sub">There's no right answer — just honest ones.</p>
+            </div>
+          </div>
+
+          <div class="fs-body">
+            <div class="form-group">
+              <label class="form-label">I work best when… *</label>
+              <div class="style-grid" id="work-style-grid">
+                <div class="style-opt" data-val="solo" tabindex="0" role="radio" aria-checked="false" id="style-solo">
+                  <span class="style-emoji">🎧</span>
+                  <span class="style-label">Working alone, independently</span>
+                </div>
+                <div class="style-opt" data-val="collab" tabindex="0" role="radio" aria-checked="false" id="style-collab">
+                  <span class="style-emoji">🤝</span>
+                  <span class="style-label">Collaborating with a team</span>
+                </div>
+                <div class="style-opt" data-val="mix" tabindex="0" role="radio" aria-checked="false" id="style-mix">
+                  <span class="style-emoji">⚖️</span>
+                  <span class="style-label">A mix of both</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">I prefer tasks that are… *</label>
+              <div class="style-grid" id="task-type-grid">
+                <div class="style-opt" data-val="structured" tabindex="0" role="radio" aria-checked="false" id="style-structured">
+                  <span class="style-emoji">📐</span>
+                  <span class="style-label">Structured &amp; well-defined</span>
+                </div>
+                <div class="style-opt" data-val="open" tabindex="0" role="radio" aria-checked="false" id="style-open">
+                  <span class="style-emoji">🌊</span>
+                  <span class="style-label">Open-ended &amp; creative</span>
+                </div>
+                <div class="style-opt" data-val="both" tabindex="0" role="radio" aria-checked="false" id="style-both">
+                  <span class="style-emoji">🔀</span>
+                  <span class="style-label">A healthy balance</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">My preferred output is… *</label>
+              <div class="style-grid style-grid-4" id="output-type-grid">
+                <div class="style-opt" data-val="visual" tabindex="0" role="radio" aria-checked="false" id="style-visual">
+                  <span class="style-emoji">🖼️</span>
+                  <span class="style-label">Visual &amp; aesthetic things</span>
+                </div>
+                <div class="style-opt" data-val="written" tabindex="0" role="radio" aria-checked="false" id="style-written">
+                  <span class="style-emoji">📝</span>
+                  <span class="style-label">Written docs &amp; analysis</span>
+                </div>
+                <div class="style-opt" data-val="code" tabindex="0" role="radio" aria-checked="false" id="style-code">
+                  <span class="style-emoji">💻</span>
+                  <span class="style-label">Code &amp; functional tools</span>
+                </div>
+                <div class="style-opt" data-val="strategy" tabindex="0" role="radio" aria-checked="false" id="style-strategy">
+                  <span class="style-emoji">🗺️</span>
+                  <span class="style-label">Plans &amp; decisions</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fs-actions">
+            <button class="btn btn-ghost" onclick="goToStep(3)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              Back
+            </button>
+            <button class="btn btn-primary btn-lg" id="submit-profile" onclick="submitProfile()">
+              🚀 Get My Recommendations
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <!-- end form-shell -->
+
+    </div>
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="alert" aria-live="polite">
+    <span class="toast-icon">✨</span>
+    <span id="toast-message">Profile saved!</span>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="profile.js"></script>
+</body>
+</html>

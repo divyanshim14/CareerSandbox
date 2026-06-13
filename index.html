@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerSandbox — Try Careers Before Marrying Them</title>
+  <meta name="description" content="Explore careers hands-on through short, realistic simulations. UI/UX, Product Management, Data, and more. No commitment. Just clarity." />
+  <meta property="og:title" content="CareerSandbox — Try Careers Before Marrying Them" />
+  <meta property="og:description" content="Hands-on career simulations for students. Discover what resonates before committing." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="landing.css" />
+</head>
+<body>
+  <div class="bg-warm" aria-hidden="true"></div>
+
+  <!-- Soft blob decorations -->
+  <div class="blob" style="width:500px;height:500px;background:#C4B5FD;top:-150px;left:-100px" aria-hidden="true"></div>
+  <div class="blob" style="width:400px;height:400px;background:#FCA5A5;top:200px;right:-80px;animation-delay:-3s" aria-hidden="true"></div>
+  <div class="blob" style="width:350px;height:350px;background:#86C490;bottom:200px;left:5%;animation-delay:-6s" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo" aria-label="CareerSandbox Home">
+          <div class="logo-mark">🧪</div>
+          CareerSandbox
+        </a>
+        <div class="nav-links" role="list">
+          <a href="index.html" class="active" role="listitem">Home</a>
+          <a href="#how-it-works" role="listitem">How It Works</a>
+          <a href="#careers" role="listitem">Simulations</a>
+          <a href="profile.html" role="listitem">My Profile</a>
+        </div>
+        <div class="nav-right">
+          <a href="profile.html" class="nav-cta" id="nav-cta-btn" aria-label="Start exploring">Start Exploring →</a>
+          <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu" role="navigation">
+    <a href="index.html">🏠 Home</a>
+    <a href="#how-it-works">⚙️ How It Works</a>
+    <a href="#careers">🎯 Simulations</a>
+    <a href="profile.html">👤 My Profile</a>
+    <a href="profile.html" class="btn btn-primary" style="margin-top:0.5rem;justify-content:center">Start Exploring →</a>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero" aria-labelledby="hero-title">
+    <div class="container">
+      <div class="hero-layout">
+
+        <!-- Left: Copy -->
+        <div class="hero-content">
+
+          <!-- Returning user banner -->
+          <div class="returning-banner hidden" id="returning-banner" role="status">
+            <span class="returning-avatar" id="returning-avatar">👋</span>
+            <div>
+              <div class="returning-name" id="returning-name">Welcome back!</div>
+              <div class="returning-sub">Continue where you left off</div>
+            </div>
+            <a href="results.html" class="btn btn-sm btn-secondary">View Results →</a>
+          </div>
+
+          <div class="hero-pill anim-fadeup" style="animation-delay:0.05s">
+            <span class="hero-pill-dot" aria-hidden="true"></span>
+            <span>7 Career Simulations · Free</span>
+          </div>
+
+          <h1 class="hero-title anim-fadeup" id="hero-title" style="animation-delay:0.1s">
+            Try careers before<br />
+            <span class="hero-highlight">marrying them.</span>
+          </h1>
+
+          <p class="hero-sub anim-fadeup" style="animation-delay:0.2s">
+            Short, realistic simulations of 7 different careers — so you can feel what a role is like before choosing a path. No tutorials. No lectures. Just real decisions.
+          </p>
+
+          <div class="hero-actions anim-fadeup" style="animation-delay:0.3s">
+            <a href="profile.html" class="btn btn-primary btn-lg" id="hero-cta" aria-label="Start exploring careers">
+              Start Exploring
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#how-it-works" class="btn btn-ghost btn-lg">See How It Works</a>
+          </div>
+
+          <div class="hero-note anim-fadeup" style="animation-delay:0.4s">
+            <span>🪞</span>
+            <span>We are a mirror, not an oracle — this is about exploration, not predictions.</span>
+          </div>
+        </div>
+
+        <!-- Right: Career Journey Illustration -->
+        <div class="hero-visual anim-fadein" style="animation-delay:0.35s" aria-label="Career exploration illustration" aria-hidden="true">
+          <div class="journey-map">
+            <!-- Central "You" node -->
+            <div class="jm-center">
+              <div class="jm-you">You</div>
+            </div>
+            <!-- Career paths branching out -->
+            <div class="jm-path jm-path-ux">
+              <div class="jm-line jm-line-ux"></div>
+              <div class="jm-node jm-node-ux">🎨</div>
+              <div class="jm-label">UI/UX</div>
+            </div>
+            <div class="jm-path jm-path-pm">
+              <div class="jm-line jm-line-pm"></div>
+              <div class="jm-node jm-node-pm">📋</div>
+              <div class="jm-label">Product</div>
+            </div>
+            <div class="jm-path jm-path-fe">
+              <div class="jm-line jm-line-fe"></div>
+              <div class="jm-node jm-node-fe">💻</div>
+              <div class="jm-label">Frontend</div>
+            </div>
+            <div class="jm-path jm-path-da">
+              <div class="jm-line jm-line-da"></div>
+              <div class="jm-node jm-node-da">📊</div>
+              <div class="jm-label">Data</div>
+            </div>
+            <div class="jm-path jm-path-cs">
+              <div class="jm-line jm-line-cs"></div>
+              <div class="jm-node jm-node-cs">✍️</div>
+              <div class="jm-label">Content</div>
+            </div>
+            <div class="jm-path jm-path-ent">
+              <div class="jm-line jm-line-ent"></div>
+              <div class="jm-node jm-node-ent">🚀</div>
+              <div class="jm-label">Startup</div>
+            </div>
+            <div class="jm-path jm-path-ai">
+              <div class="jm-line jm-line-ai"></div>
+              <div class="jm-node jm-node-ai">🤖</div>
+              <div class="jm-label">AI/ML</div>
+            </div>
+            <!-- Decorative sparkles -->
+            <div class="jm-sparkle s1">✦</div>
+            <div class="jm-sparkle s2">✦</div>
+            <div class="jm-sparkle s3">✦</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <section class="how-section" id="how-it-works" aria-labelledby="how-title">
+    <div class="container">
+      <div class="section-header">
+        <div class="pill"><div class="pill-dot"></div><span>The Journey</span></div>
+        <h2 class="section-title" id="how-title">Four steps to career clarity</h2>
+        <p class="section-sub">No sign-up required. No commitment. Start anytime.</p>
+      </div>
+
+      <div class="how-steps">
+        <div class="how-step reveal" id="how-step-1">
+          <div class="how-step-num" style="background:var(--lavender-xl);color:var(--lavender);border-color:var(--lavender-l)">1</div>
+          <div class="how-step-content">
+            <div class="how-step-emoji">👤</div>
+            <h3>Build your profile</h3>
+            <p>Tell us your branch, year, interests, and how you like to work. Takes about 2 minutes. No account needed.</p>
+          </div>
+        </div>
+        <div class="how-connector reveal" aria-hidden="true">→</div>
+        <div class="how-step reveal" id="how-step-2" style="transition-delay:0.1s">
+          <div class="how-step-num" style="background:var(--rose-l);color:#BE185D;border-color:var(--rose)">2</div>
+          <div class="how-step-content">
+            <div class="how-step-emoji">🎯</div>
+            <h3>Get recommendations</h3>
+            <p>We rank 7 careers by how well they match your profile and interests. Pick any one — there's no wrong choice here.</p>
+          </div>
+        </div>
+        <div class="how-connector reveal" aria-hidden="true" style="transition-delay:0.1s">→</div>
+        <div class="how-step reveal" id="how-step-3" style="transition-delay:0.2s">
+          <div class="how-step-num" style="background:var(--peach-l);color:#B45309;border-color:var(--peach)">3</div>
+          <div class="how-step-content">
+            <div class="how-step-emoji">🎮</div>
+            <h3>Try the simulation</h3>
+            <p>Real tasks, real decisions. No tutorials. Each simulation adapts to your experience level. Usually 5–8 minutes.</p>
+          </div>
+        </div>
+        <div class="how-connector reveal" aria-hidden="true" style="transition-delay:0.2s">→</div>
+        <div class="how-step reveal" id="how-step-4" style="transition-delay:0.3s">
+          <div class="how-step-num" style="background:var(--sage-l);color:#15803D;border-color:var(--sage)">4</div>
+          <div class="how-step-content">
+            <div class="how-step-emoji">🪞</div>
+            <h3>Read your report</h3>
+            <p>See your strengths, patterns, and which careers felt most natural. Explore more — every simulation adds clarity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CAREERS ═══ -->
+  <section class="careers-section" id="careers" aria-labelledby="careers-title">
+    <div class="container">
+      <div class="section-header">
+        <div class="pill"><div class="pill-dot"></div><span>Simulations</span></div>
+        <h2 class="section-title" id="careers-title">7 careers. All fully built. Try any.</h2>
+        <p class="section-sub">Each simulation gives you real tasks from that career. No background knowledge required.</p>
+      </div>
+
+      <div class="career-cards-grid" id="careers-grid">
+        <!-- UX -->
+        <div class="lc-card reveal" id="lc-ux" style="--card-color:#C084FC;--card-light:#F3E8FF;--card-border:#E9D5FF">
+          <div class="lc-stripe" style="background:linear-gradient(90deg,#C084FC,#E879F9)"></div>
+          <div class="lc-body">
+            <div class="lc-emoji">🎨</div>
+            <h3 class="lc-name">UI/UX Design</h3>
+            <p class="lc-desc">Compare designs, audit interfaces, choose micro-interactions. Feel what it's like to advocate for the user.</p>
+            <div class="lc-tags">
+              <span class="lc-tag" style="background:#F3E8FF;color:#7E22CE;border-color:#E9D5FF">Creative</span>
+              <span class="lc-tag" style="background:#F3E8FF;color:#7E22CE;border-color:#E9D5FF">Visual</span>
+              <span class="lc-tag" style="background:#F3E8FF;color:#7E22CE;border-color:#E9D5FF">~8 min</span>
+            </div>
+          </div>
+          <div class="lc-footer">
+            <a href="profile.html" class="lc-btn" id="btn-ux">Try Simulation →</a>
+          </div>
+        </div>
+
+        <!-- PM -->
+        <div class="lc-card reveal" id="lc-pm" style="--card-color:#F472B6;--card-light:#FCE7F3;--card-border:#FBCFE8;transition-delay:0.05s">
+          <div class="lc-stripe" style="background:linear-gradient(90deg,#F472B6,#FB923C)"></div>
+          <div class="lc-body">
+            <div class="lc-emoji">📋</div>
+            <h3 class="lc-name">Product Management</h3>
+            <p class="lc-desc">Prioritise sprint features, choose success metrics, think like a PM who ships with confidence.</p>
+            <div class="lc-tags">
+              <span class="lc-tag" style="background:#FCE7F3;color:#9D174D;border-color:#FBCFE8">Strategic</span>
+              <span class="lc-tag" style="background:#FCE7F3;color:#9D174D;border-color:#FBCFE8">Leadership</span>
+              <span class="lc-tag" style="background:#FCE7F3;color:#9D174D;border-color:#FBCFE8">~6 min</span>
+            </div>
+          </div>
+          <div class="lc-footer">
+            <a href="profile.html" class="lc-btn" id="btn-pm">Try Simulation →</a>
+          </div>
+        </div>
+
+        <!-- Frontend -->
+        <div class="lc-card reveal" id="lc-fe" style="--card-color:#60A5FA;--card-light:#DBEAFE;--card-border:#BFDBFE;transition-delay:0.1s">
+          <div class="lc-stripe" style="background:linear-gradient(90deg,#60A5FA,#34D399)"></div>
+          <div class="lc-body">
+            <div class="lc-emoji">💻</div>
+            <h3 class="lc-name">Frontend Dev</h3>
+            <p class="lc-desc">Hunt bugs in HTML/CSS, improve a broken button, feel what makes frontend work satisfying.</p>
+            <div class="lc-tags">
+              <span class="lc-tag" style="background:#DBEAFE;color:#1D4ED8;border-color:#BFDBFE">Technical</span>
+              <span class="lc-tag" style="background:#DBEAFE;color:#1D4ED8;border-color:#BFDBFE">Detail-oriented</span>
+              <span class="lc-tag" style="background:#DBEAFE;color:#1D4ED8;border-color:#BFDBFE">~7 min</span>
+            </div>
+          </div>
+          <div class="lc-footer">
+            <a href="profile.html" class="lc-btn" id="btn-fe">Try Simulation →</a>
+          </div>
+        </div>
+
+        <!-- Data -->
+        <div class="lc-card reveal" id="lc-da" style="--card-color:#FBBF24;--card-light:#FEF3C7;--card-border:#FDE68A;transition-delay:0.05s">
+          <div class="lc-stripe" style="background:linear-gradient(90deg,#FBBF24,#F87171)"></div>
+          <div class="lc-body">
+            <div class="lc-emoji">📊</div>
+            <h3 class="lc-name">Data Analytics</h3>
+            <p class="lc-desc">Spot the misleading chart, read a user funnel, turn messy numbers into a clear story.</p>
+            <div class="lc-tags">
+              <span class="lc-tag" style="background:#FEF3C7;color:#92400E;border-color:#FDE68A">Analytical</span>
+              <span class="lc-tag" style="background:#FEF3C7;color:#92400E;border-color:#FDE68A">Curious</span>
+              <span class="lc-tag" style="background:#FEF3C7;color:#92400E;border-color:#FDE68A">~8 min</span>
+            </div>
+          </div>
+          <div class="lc-footer">
+            <a href="profile.html" class="lc-btn" id="btn-da">Try Simulation →</a>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="lc-card reveal" id="lc-cs" style="--card-color:#34D399;--card-light:#DCFCE7;--card-border:#BBF7D0;transition-delay:0.1s">
+          <div class="lc-stripe" style="background:linear-gradient(90deg,#34D399,#60A5FA)"></div>
+          <div class="lc-body">
+            <div class="lc-emoji">✍️</div>
+            <h3 class="lc-name">Content Strategy</h3>
+            <p class="lc-desc">Fix brand voice, pick the better headline, write for real audiences. No generic copy allowed.</p>
+            <div class="lc-tags">
+              <span class="lc-tag" style="background:#DCFCE7;color:#166534;border-color:#BBF7D0">Creative</span>
+              <span class="lc-tag" style="background:#DCFCE7;color:#166534;border-color:#BBF7D0">Empathetic</span>
+              <span class="lc-tag" style="background:#DCFCE7;color:#166534;border-color:#BBF7D0">~5 min</span>
+            </div>
+          </div>
+          <div class="lc-footer">
+            <a href="profile.html" class="lc-btn" id="btn-cs">Try Simulation →</a>
+          </div>
+        </div>
+
+        <!-- Entrepreneurship -->
+        <div class="lc-card reveal" id="lc-ent" style="--card-color:#FB7185;--card-light:#FFE4E6;--card-border:#FECDD3;transition-delay:0.15s">
+          <div class="lc-stripe" style="background:linear-gradient(90deg,#FB7185,#FDBA74)"></div>
+          <div class="lc-body">
+            <div class="lc-emoji">🚀</div>
+            <h3 class="lc-name">Entrepreneurship</h3>
+            <p class="lc-desc">Validate a startup idea, allocate a tight budget, make calls with incomplete information.</p>
+            <div class="lc-tags">
+              <span class="lc-tag" style="background:#FFE4E6;color:#9F1239;border-color:#FECDD3">Risk-taking</span>
+              <span class="lc-tag" style="background:#FFE4E6;color:#9F1239;border-color:#FECDD3">Resourceful</span>
+              <span class="lc-tag" style="background:#FFE4E6;color:#9F1239;border-color:#FECDD3">~7 min</span>
+            </div>
+          </div>
+          <div class="lc-footer">
+            <a href="profile.html" class="lc-btn" id="btn-ent">Try Simulation →</a>
+          </div>
+        </div>
+
+        <!-- AI/ML -->
+        <div class="lc-card reveal" id="lc-aiml" style="--card-color:#818CF8;--card-light:#EEF2FF;--card-border:#C7D2FE;transition-delay:0.2s">
+          <div class="lc-stripe" style="background:linear-gradient(90deg,#818CF8,#C084FC)"></div>
+          <div class="lc-body">
+            <div class="lc-emoji">🤖</div>
+            <h3 class="lc-name">AI/ML Exploration</h3>
+            <p class="lc-desc">Label data, spot bias in a model, navigate the messy ethics of machine learning at scale.</p>
+            <div class="lc-tags">
+              <span class="lc-tag" style="background:#EEF2FF;color:#3730A3;border-color:#C7D2FE">Analytical</span>
+              <span class="lc-tag" style="background:#EEF2FF;color:#3730A3;border-color:#C7D2FE">Ethical</span>
+              <span class="lc-tag" style="background:#EEF2FF;color:#3730A3;border-color:#C7D2FE">~6 min</span>
+            </div>
+          </div>
+          <div class="lc-footer">
+            <a href="profile.html" class="lc-btn" id="btn-aiml">Try Simulation →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="careers-cta reveal" style="transition-delay:0.25s">
+        <a href="profile.html" class="btn btn-primary btn-lg" id="careers-start-btn">Build my profile first →</a>
+        <p class="careers-cta-note">Your profile helps us rank which simulation to try first</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MIRROR PHILOSOPHY ═══ -->
+  <section class="mirror-section" id="mirror" aria-label="Our philosophy">
+    <div class="container">
+      <div class="mirror-card">
+        <div class="mirror-emoji" aria-hidden="true">🪞</div>
+        <div class="mirror-content">
+          <h2 class="mirror-title">"We are a mirror, not an oracle."</h2>
+          <p class="mirror-body">CareerSandbox reflects what we observe in how you interact — where you pause, what you choose, how you reason. These are not predictions about your future. They're observations about your present curiosity.</p>
+          <p class="mirror-body" style="margin-top:0.75rem">Use them as starting points. Question them. Try another simulation and see if things change. Career exploration is a journey, not a quiz.</p>
+        </div>
+        <div class="mirror-quote-mark" aria-hidden="true">"</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FINAL CTA ═══ -->
+  <section class="cta-section" aria-label="Get started">
+    <div class="container">
+      <div class="cta-inner">
+        <h2 class="cta-title">Ready to start exploring?</h2>
+        <p class="cta-sub">Takes 2 minutes to set up. No account, no payment, no pressure.</p>
+        <a href="profile.html" class="btn btn-primary btn-lg" id="final-cta-btn">
+          Build my profile →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <div class="logo-mark" style="width:28px;height:28px;font-size:0.85rem">🧪</div>
+          <span>CareerSandbox</span>
+        </div>
+        <p class="footer-copy">A space for curious students. Not career advice. Just honest exploration.</p>
+        <div class="footer-links">
+          <a href="profile.html">Start Exploring</a>
+          <a href="recommendations.html">Careers</a>
+          <a href="results.html">My Results</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="alert" aria-live="polite">
+    <span class="toast-icon">✨</span>
+    <span id="toast-message">Welcome back!</span>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="landing.js"></script>
+</body>
+</html>

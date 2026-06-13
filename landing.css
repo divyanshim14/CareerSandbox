@@ -1,0 +1,344 @@
+/* ═══════════════════════════════════════════════
+   LANDING PAGE CSS v3 — Warm Explorer
+   Light mode · Journey-first · Student product
+═══════════════════════════════════════════════ */
+
+/* ── Hero ─────────────────────────────────────── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 100px 0 var(--s-20);
+  position: relative; overflow: hidden;
+}
+
+.hero-layout {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--s-16); align-items: center;
+}
+
+.hero-content { position: relative; z-index: 1; }
+
+/* Pill */
+.hero-pill {
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  padding: 0.4rem 1rem;
+  background: white; border: 1.5px solid var(--border);
+  border-radius: var(--r-full); box-shadow: var(--shadow-sm);
+  font-size: 0.78rem; font-weight: 600; color: var(--ink-2);
+  margin-bottom: var(--s-6);
+}
+.hero-pill-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--lavender), var(--rose));
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Title */
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 800; line-height: 1.1;
+  letter-spacing: -0.035em; color: var(--ink);
+  margin-bottom: var(--s-6);
+}
+.hero-highlight {
+  background: linear-gradient(135deg, #9B8FD4 0%, #F4A7B9 60%, #FDBA74 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 1.05rem; color: var(--ink-2); line-height: 1.75;
+  max-width: 480px; margin-bottom: var(--s-8);
+}
+
+.hero-actions {
+  display: flex; align-items: center; gap: var(--s-4); flex-wrap: wrap;
+  margin-bottom: var(--s-8);
+}
+
+.hero-note {
+  display: flex; align-items: flex-start; gap: var(--s-3);
+  font-size: 0.82rem; color: var(--ink-3); line-height: 1.55;
+  max-width: 400px;
+  padding: var(--s-4) var(--s-5);
+  background: white; border: 1.5px solid var(--border);
+  border-radius: var(--r-lg); box-shadow: var(--shadow-xs);
+}
+.hero-note > span:first-child { font-size: 1rem; flex-shrink: 0; }
+
+/* Returning banner */
+.returning-banner {
+  display: flex; align-items: center; gap: var(--s-4);
+  padding: var(--s-4) var(--s-5);
+  background: var(--peach-l); border: 1.5px solid var(--peach);
+  border-radius: var(--r-xl); margin-bottom: var(--s-8);
+  animation: fadeUp 0.5s ease both;
+  box-shadow: var(--shadow-sm);
+}
+.returning-banner.hidden { display: none; }
+.returning-avatar { font-size: 1.5rem; }
+.returning-name { font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; color: var(--ink); }
+.returning-sub { font-size: 0.75rem; color: var(--ink-2); }
+
+/* ── Journey Map (Hero Illustration) ─────────── */
+.hero-visual {
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+}
+
+.journey-map {
+  position: relative; width: 420px; height: 420px;
+}
+
+/* Center "You" node */
+.jm-center {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+.jm-you {
+  width: 70px; height: 70px; border-radius: 50%;
+  background: var(--ink); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 0.95rem; font-weight: 800;
+  box-shadow: 0 4px 20px rgba(45,42,62,0.3);
+  animation: bounce 3s ease-in-out infinite;
+}
+
+/* Career paths */
+.jm-path {
+  position: absolute; display: flex; flex-direction: column; align-items: center;
+  z-index: 5;
+}
+
+/* Lines connecting center to nodes */
+.jm-path::before {
+  content: ''; position: absolute; background: var(--border);
+  transform-origin: center;
+}
+
+/* Node circles */
+.jm-node {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; background: white;
+  box-shadow: var(--shadow-md); border: 2px solid var(--border);
+  transition: transform var(--t-spring);
+  animation: blobFloat 6s ease-in-out infinite;
+  cursor: default;
+}
+.jm-node:hover { transform: scale(1.15); }
+.jm-label { font-size: 0.68rem; font-weight: 700; color: var(--ink-2); margin-top: 6px; text-align: center; white-space: nowrap; }
+
+/* Position each career around center */
+.jm-path-ux  { top: 8%; left: 50%; transform: translateX(-50%); }
+.jm-path-pm  { top: 18%; left: 78%; }
+.jm-path-fe  { top: 50%; left: 84%; transform: translateY(-50%); }
+.jm-path-da  { bottom: 10%; left: 73%; }
+.jm-path-cs  { bottom: 6%; left: 50%; transform: translateX(-50%); }
+.jm-path-ent { bottom: 18%; left: 8%; }
+.jm-path-ai  { top: 18%; left: 8%; }
+
+/* Node colors */
+.jm-node-ux  { border-color: #E9D5FF; background: #F3E8FF; }
+.jm-node-pm  { border-color: var(--rose); background: var(--rose-l); }
+.jm-node-fe  { border-color: var(--sky-l); background: var(--sky-l); }
+.jm-node-da  { border-color: var(--peach-l); background: #FEF3C7; }
+.jm-node-cs  { border-color: var(--sage-l); background: #DCFCE7; }
+.jm-node-ent { border-color: #FECDD3; background: #FFE4E6; }
+.jm-node-ai  { border-color: #C7D2FE; background: #EEF2FF; }
+
+/* Animation delays for life-like feel */
+.jm-node-ux  { animation-delay: 0s; }
+.jm-node-pm  { animation-delay: -1s; }
+.jm-node-fe  { animation-delay: -2s; }
+.jm-node-da  { animation-delay: -3s; }
+.jm-node-cs  { animation-delay: -4s; }
+.jm-node-ent { animation-delay: -5s; }
+.jm-node-ai  { animation-delay: -1.5s; }
+
+/* Lines from center to nodes (CSS art) */
+.jm-line {
+  position: absolute; height: 2px; background: var(--border);
+  transform-origin: left center; z-index: 1;
+}
+
+/* Sparkles */
+.jm-sparkle {
+  position: absolute; font-size: 1rem; color: var(--lavender);
+  animation: sparkle 2s ease-in-out infinite;
+  pointer-events: none;
+}
+.s1 { top: 30%; left: 30%; animation-delay: 0s; }
+.s2 { top: 55%; left: 65%; animation-delay: -0.7s; font-size: 0.7rem; color: var(--rose); }
+.s3 { bottom: 25%; left: 40%; animation-delay: -1.4s; font-size: 0.8rem; color: var(--sage); }
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.4; transform: scale(1) rotate(0deg); }
+  50%       { opacity: 1;   transform: scale(1.3) rotate(15deg); }
+}
+
+/* ── How It Works ─────────────────────────────── */
+.how-section {
+  padding: var(--s-20) 0;
+  background: var(--cream);
+  position: relative;
+}
+
+.section-header { text-align: center; margin-bottom: var(--s-16); }
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 800; letter-spacing: -0.025em; color: var(--ink);
+  margin-bottom: var(--s-3);
+}
+.section-sub { font-size: 1rem; color: var(--ink-2); max-width: 500px; margin: 0 auto; line-height: 1.7; }
+
+.how-steps {
+  display: flex; align-items: flex-start; gap: 0;
+  flex-wrap: wrap; justify-content: center;
+}
+
+.how-step {
+  display: flex; flex-direction: column; align-items: center; gap: var(--s-5);
+  max-width: 200px; text-align: center;
+}
+
+.how-step-num {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 1.2rem; font-weight: 800;
+  border: 2px solid; box-shadow: var(--shadow-sm);
+}
+.how-step-emoji { font-size: 1.8rem; }
+.how-step-content h3 {
+  font-family: var(--font-display); font-size: 0.95rem; font-weight: 700;
+  color: var(--ink); margin-bottom: var(--s-2);
+}
+.how-step-content p { font-size: 0.82rem; color: var(--ink-2); line-height: 1.65; }
+
+.how-connector {
+  font-size: 1.5rem; color: var(--border); margin: 0 var(--s-3); padding-top: 16px;
+  flex-shrink: 0;
+}
+
+/* ── Career Cards ─────────────────────────────── */
+.careers-section { padding: var(--s-20) 0; }
+
+.career-cards-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-5); margin-bottom: var(--s-10);
+}
+
+.lc-card {
+  background: white; border: 1.5px solid var(--border);
+  border-radius: var(--r-xl); overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--t-spring), box-shadow var(--t-base), border-color var(--t-base);
+  display: flex; flex-direction: column;
+}
+.lc-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hov); border-color: var(--card-border, var(--border)); }
+
+.lc-stripe { height: 5px; width: 100%; }
+.lc-body { padding: var(--s-6); flex: 1; }
+.lc-emoji { font-size: 2rem; margin-bottom: var(--s-4); }
+.lc-name { font-family: var(--font-display); font-size: 0.95rem; font-weight: 800; color: var(--ink); margin-bottom: var(--s-2); }
+.lc-desc { font-size: 0.78rem; color: var(--ink-2); line-height: 1.65; margin-bottom: var(--s-4); }
+
+.lc-tags { display: flex; flex-wrap: wrap; gap: var(--s-1); }
+.lc-tag {
+  font-size: 0.68rem; font-weight: 600; padding: 0.2rem 0.6rem;
+  border-radius: var(--r-full); border: 1px solid;
+}
+
+.lc-footer {
+  padding: var(--s-4) var(--s-6); border-top: 1.5px solid var(--border);
+  background: var(--bg);
+}
+.lc-btn {
+  display: block; text-align: center;
+  padding: 0.55rem 1rem;
+  background: white; color: var(--ink);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-full);
+  font-size: 0.8rem; font-weight: 700;
+  transition: all var(--t-spring);
+}
+.lc-btn:hover {
+  background: var(--ink); color: white; border-color: var(--ink);
+  transform: translateY(-2px); box-shadow: 0 4px 12px rgba(45,42,62,0.2);
+}
+
+.careers-cta { text-align: center; }
+.careers-cta-note { font-size: 0.82rem; color: var(--ink-3); margin-top: var(--s-3); }
+
+/* ── Mirror Section ───────────────────────────── */
+.mirror-section { padding: var(--s-20) 0; }
+
+.mirror-card {
+  background: var(--lavender-xl); border: 1.5px solid var(--lavender-l);
+  border-radius: var(--r-2xl); padding: var(--s-12) var(--s-16);
+  display: flex; gap: var(--s-8); align-items: flex-start;
+  position: relative; overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.mirror-emoji { font-size: 3rem; flex-shrink: 0; }
+.mirror-content { flex: 1; }
+.mirror-title {
+  font-family: var(--font-display); font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 800; color: var(--ink); margin-bottom: var(--s-5); line-height: 1.25;
+}
+.mirror-body { font-size: 0.95rem; color: var(--ink-2); line-height: 1.8; }
+.mirror-quote-mark {
+  position: absolute; bottom: -20px; right: var(--s-10);
+  font-size: 8rem; color: rgba(155,143,212,0.12); font-family: Georgia, serif;
+  line-height: 1; pointer-events: none; user-select: none;
+}
+
+/* ── Final CTA ────────────────────────────────── */
+.cta-section { padding: var(--s-20) 0; background: var(--cream); }
+.cta-inner { text-align: center; max-width: 500px; margin: 0 auto; }
+.cta-title {
+  font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 800; color: var(--ink); margin-bottom: var(--s-4);
+}
+.cta-sub { font-size: 1rem; color: var(--ink-2); margin-bottom: var(--s-8); line-height: 1.65; }
+
+/* ── Footer ───────────────────────────────────── */
+.site-footer {
+  background: white; border-top: 1.5px solid var(--border);
+  padding: var(--s-8) 0;
+}
+.footer-inner {
+  display: flex; align-items: center; gap: var(--s-8); flex-wrap: wrap;
+}
+.footer-logo { display: flex; align-items: center; gap: var(--s-3); font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--ink); }
+.footer-copy { flex: 1; font-size: 0.82rem; color: var(--ink-3); }
+.footer-links { display: flex; gap: var(--s-6); }
+.footer-links a { font-size: 0.82rem; color: var(--ink-2); transition: color var(--t-fast); font-weight: 500; }
+.footer-links a:hover { color: var(--lavender); }
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 1100px) {
+  .career-cards-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 900px) {
+  .hero-layout { grid-template-columns: 1fr; gap: var(--s-10); }
+  .hero-visual { justify-content: flex-start; }
+  .journey-map { width: 320px; height: 320px; }
+  .jm-you { width: 56px; height: 56px; font-size: 0.8rem; }
+  .jm-node { width: 42px; height: 42px; font-size: 1.1rem; }
+}
+@media (max-width: 768px) {
+  .career-cards-grid { grid-template-columns: repeat(2, 1fr); }
+  .how-steps { gap: var(--s-6); }
+  .how-connector { display: none; }
+  .mirror-card { flex-direction: column; padding: var(--s-8); gap: var(--s-5); }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: var(--s-4); }
+}
+@media (max-width: 500px) {
+  .career-cards-grid { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .hero-visual { display: none; }
+  .mirror-quote-mark { display: none; }
+}

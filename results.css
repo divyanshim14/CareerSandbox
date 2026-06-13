@@ -1,0 +1,195 @@
+/* ═══════════════════════════════════════════════
+   RESULTS PAGE CSS v3 — Career Discovery Report
+   Light mode · Celebratory · Spotify Wrapped energy
+═══════════════════════════════════════════════ */
+
+.results-page { padding: 90px 0 var(--s-24); min-height: 100vh; background: var(--bg); }
+
+/* ── Report Header ────────────────────────────── */
+.report-header { text-align: center; margin-bottom: var(--s-10); padding-top: var(--s-4); }
+
+.report-confetti {
+  display: flex; justify-content: center; gap: var(--s-4);
+  font-size: 1.4rem; margin-bottom: var(--s-5);
+  animation: fadeUp 0.4s ease both;
+}
+.report-confetti span {
+  animation: bounce 2s ease-in-out infinite;
+  display: inline-block;
+}
+.report-confetti span:nth-child(2) { animation-delay: -0.3s; }
+.report-confetti span:nth-child(3) { animation-delay: -0.6s; }
+.report-confetti span:nth-child(4) { animation-delay: -0.9s; }
+.report-confetti span:nth-child(5) { animation-delay: -1.2s; }
+
+.report-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 800; line-height: 1.15;
+  letter-spacing: -0.025em; color: var(--ink);
+  margin-bottom: var(--s-3);
+}
+.report-sub { font-size: 1rem; color: var(--ink-2); max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+/* ── Achievement Cards ────────────────────────── */
+.achievement-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-5); margin-bottom: var(--s-6);
+}
+
+.ach-card {
+  padding: var(--s-6); border-radius: var(--r-xl);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--t-spring), box-shadow var(--t-base);
+}
+.ach-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hov); }
+
+.ach-engagement { background: var(--lavender-xl); border-color: var(--lavender-l); }
+.ach-confidence { background: var(--rose-l); border-color: var(--rose); }
+.ach-exploration { background: var(--sage-l); border-color: var(--sage); }
+
+.ach-icon { font-size: 1.6rem; margin-bottom: var(--s-3); }
+.ach-label {
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--ink-2); margin-bottom: var(--s-2);
+}
+.ach-num {
+  font-family: var(--font-display); font-size: 2.8rem; font-weight: 900;
+  line-height: 1; color: var(--ink); margin-bottom: var(--s-2);
+}
+.ach-desc { font-size: 0.78rem; color: var(--ink-2); line-height: 1.55; }
+
+/* ── Session Strip ────────────────────────────── */
+.session-strip {
+  display: flex; align-items: center; flex-wrap: wrap;
+  background: white; border-radius: var(--r-2xl); border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-sm); padding: var(--s-5) var(--s-8);
+  margin-bottom: var(--s-8); gap: 0;
+}
+.ss-item { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 100px; align-items: center; }
+.ss-icon { font-size: 1.1rem; margin-bottom: 2px; }
+.ss-label { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-3); }
+.ss-val { font-size: 0.85rem; font-weight: 700; color: var(--ink); }
+.ss-sep { width: 1.5px; height: 48px; background: var(--border); margin: 0 var(--s-5); flex-shrink: 0; }
+
+/* ── Discovery Grid ───────────────────────────── */
+.discovery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); margin-bottom: var(--s-8); }
+.dg-left, .dg-right { display: flex; flex-direction: column; gap: var(--s-5); }
+
+/* Discovery Card */
+.discovery-card {
+  background: white; border: 1.5px solid var(--border);
+  border-radius: var(--r-xl); padding: var(--s-7);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--t-spring), box-shadow var(--t-base), border-color var(--t-base);
+}
+.discovery-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: rgba(155,143,212,0.25); }
+
+.dc-header { display: flex; gap: var(--s-4); align-items: flex-start; margin-bottom: var(--s-6); }
+.dc-header-icon {
+  width: 42px; height: 42px; border-radius: var(--r-lg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0;
+}
+.dc-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.dc-sub { font-size: 0.78rem; color: var(--ink-3); line-height: 1.5; }
+
+/* ── Career Affinity Bars ─────────────────────── */
+.career-bar-item { margin-bottom: var(--s-4); }
+.cbar-header { display: flex; align-items: center; gap: var(--s-2); margin-bottom: var(--s-2); }
+.cbar-emoji { font-size: 1rem; }
+.cbar-name { font-size: 0.82rem; font-weight: 600; flex: 1; color: var(--ink); }
+.cbar-simmed {
+  font-size: 0.62rem; font-weight: 700;
+  background: var(--sage-l); border: 1px solid var(--sage);
+  color: #15803D; padding: 0.15rem 0.55rem; border-radius: var(--r-full);
+}
+.cbar-pct { font-family: var(--font-display); font-size: 0.875rem; font-weight: 800; color: var(--lavender); min-width: 40px; text-align: right; }
+
+/* ── Radar ────────────────────────────────────── */
+.radar-wrap { display: flex; align-items: center; justify-content: center; padding: var(--s-4) 0; }
+#radar-canvas { max-width: 100%; }
+
+/* ── Insights (journal card style) ───────────── */
+.insights-list { display: flex; flex-direction: column; gap: var(--s-3); }
+
+.insight-item {
+  display: flex; gap: var(--s-3); align-items: flex-start;
+  padding: var(--s-4) var(--s-5);
+  border-radius: var(--r-lg);
+  border: 1.5px solid var(--border);
+  animation: fadeUp 0.5s ease both;
+  transition: transform var(--t-base);
+}
+.insight-item:hover { transform: translateY(-1px); }
+
+/* Alternate insight card colors */
+.insight-item:nth-child(1) { background: var(--lavender-xl); border-color: var(--lavender-l); }
+.insight-item:nth-child(2) { background: var(--rose-l); border-color: var(--rose); }
+.insight-item:nth-child(3) { background: var(--sage-l); border-color: var(--sage); }
+.insight-item:nth-child(4) { background: var(--peach-l); border-color: var(--peach); }
+.insight-item:nth-child(5) { background: var(--sky-l); border-color: var(--sky); }
+.insight-item:nth-child(n+6) { background: var(--lavender-xl); border-color: var(--lavender-l); }
+
+.insight-bullet { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.insight-text { font-size: 0.85rem; color: var(--ink); line-height: 1.65; }
+.insight-text strong { color: var(--ink); font-weight: 700; }
+
+/* ── Wellbeing Card ───────────────────────────── */
+.wellbeing-card { border-color: rgba(134,196,144,0.3); }
+.wb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); margin-bottom: var(--s-5); }
+.wb-metric-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-3); margin-bottom: var(--s-2); }
+.wb-metric-val {
+  font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--sage);
+}
+.wb-trend-val { font-size: 0.9rem; font-weight: 700; color: var(--ink); }
+.wb-fatigue-val { font-size: 0.875rem; font-weight: 700; }
+
+.wb-focus-rec {
+  display: flex; gap: var(--s-3); align-items: flex-start;
+  padding: var(--s-4) var(--s-5);
+  background: var(--sage-l); border: 1.5px solid var(--sage);
+  border-radius: var(--r-lg);
+}
+.wb-rec-icon { font-size: 1.1rem; flex-shrink: 0; }
+.wb-rec-text { font-size: 0.85rem; color: var(--ink); line-height: 1.65; }
+
+/* ── CTA Card ─────────────────────────────────── */
+.cta-card {
+  text-align: center;
+  background: linear-gradient(135deg, var(--lavender-xl) 0%, #FEE2E2 100%);
+  border-color: var(--lavender-l);
+}
+.cta-card-emoji { font-size: 2.5rem; margin-bottom: var(--s-4); }
+.cta-card h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--ink); margin-bottom: var(--s-3); }
+.cta-card p { font-size: 0.85rem; color: var(--ink-2); line-height: 1.65; margin-bottom: var(--s-6); }
+.cta-card-actions { display: flex; flex-direction: column; gap: var(--s-3); }
+
+/* ── Mirror Banner ────────────────────────────── */
+.report-mirror {
+  background: var(--lavender-xl); border: 1.5px solid var(--lavender-l);
+  border-radius: var(--r-2xl); padding: var(--s-8) var(--s-10);
+  display: flex; gap: var(--s-6); align-items: flex-start;
+  box-shadow: var(--shadow-sm);
+}
+.rm-emoji { font-size: 2.5rem; flex-shrink: 0; }
+.rm-content h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--lavender); margin-bottom: var(--s-3); }
+.rm-content p { font-size: 0.875rem; color: var(--ink-2); line-height: 1.8; }
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 1024px) { .discovery-grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) {
+  .achievement-row { grid-template-columns: 1fr; }
+  .session-strip { flex-direction: column; gap: var(--s-4); }
+  .ss-sep { width: 100%; height: 1.5px; margin: 0; }
+  .wb-grid { grid-template-columns: 1fr; }
+  .report-mirror { flex-direction: column; padding: var(--s-6); }
+  .discovery-card { padding: var(--s-5); }
+}
+
+@media print {
+  .navbar, .mobile-menu, .api-badge, .toast, .cta-card-actions { display: none !important; }
+  body { background: white; }
+  .results-page { padding: 20px 0; }
+}

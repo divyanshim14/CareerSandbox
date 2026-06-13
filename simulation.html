@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Career Simulation – CareerSandbox</title>
+  <meta name="description" content="Experience hands-on career simulations. Adaptive difficulty based on your profile." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="simulation.css" />
+</head>
+<body>
+  <div class="bg-warm" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+          <div class="logo-mark">🧪</div>
+          CareerSandbox
+        </a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="recommendations.html">← Back to Careers</a>
+        </div>
+        <div class="nav-right" style="display:flex;align-items:center;gap:1rem;">
+          <div class="sim-timer" id="sim-timer" role="timer" aria-label="Simulation timer">
+            <span>⏱</span>
+            <span id="timer-display">00:00</span>
+          </div>
+          <span class="diff-badge" id="diff-badge">Loading...</span>
+          <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">🏠 Home</a>
+    <a href="recommendations.html">← Back to Careers</a>
+  </div>
+
+  <main class="sim-page" id="main-content">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="sim-header" id="sim-header">
+        <div class="pill" id="sim-pill"><div class="pill-dot"></div><span id="sim-pill-text">Loading...</span></div>
+        <h1 class="sim-main-title" id="sim-title">Career Simulation</h1>
+        <p class="sim-main-sub" id="sim-subtitle">Real tasks. Real decisions. No tutorials.</p>
+      </div>
+
+      <!-- Progress -->
+      <div class="sim-prog-wrap">
+        <div class="sim-prog-meta">
+          <span id="prog-label">Task 1</span>
+          <span id="prog-pct">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="sim-progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Loading -->
+      <div id="sim-loading" class="sim-loading" role="status" aria-live="polite">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <p>Calibrating your simulation...</p>
+      </div>
+
+      <!-- Simulations container -->
+      <div id="sim-container" style="display:none">
+
+        <!-- ════════════════════ UI/UX ════════════════════ -->
+        <div id="sim-ux" class="sim-career hidden">
+
+          <!-- Task 1: Design Comparison -->
+          <div id="ux-t1" class="sim-task anim-fadeup">
+            <div class="task-header card">
+              <div class="task-num">Task 1 of 3 · UI/UX Design</div>
+              <h2 class="task-title">Which signup screen would you ship?</h2>
+              <p class="task-desc">Two design approaches for a fintech app's signup screen. One prioritizes conversion, the other trust. Evaluate both and choose the one you'd ship — then explain <em>why</em>.</p>
+              <div class="diff-hint" id="ux-diff-hint"></div>
+            </div>
+
+            <div class="design-compare">
+              <!-- Design A -->
+              <div class="design-option card card-glow" id="dopt-a" data-choice="A" tabindex="0" role="button" aria-pressed="false" aria-label="Select Design A">
+                <div class="design-select-indicator">Selected ✓</div>
+                <div class="design-label-badge">Design A — Minimal & Clean</div>
+                <div class="mock-screen mock-a">
+                  <div class="mock-nav-bar"></div>
+                  <div class="mock-logo-big">💳</div>
+                  <div class="mock-tagline">Your money, simplified</div>
+                  <div class="mock-field">Full Name</div>
+                  <div class="mock-field">Email address</div>
+                  <div class="mock-field">Password</div>
+                  <div class="mock-btn-a">Create Account</div>
+                  <div class="mock-divider">or</div>
+                  <div class="mock-social">
+                    <div class="mock-social-btn">G Google</div>
+                    <div class="mock-social-btn">🍎 Apple</div>
+                  </div>
+                  <div class="mock-link small">Already have an account? Sign in</div>
+                </div>
+                <div class="design-meta">
+                  <span class="design-tag design-tag-a">Clean layout</span>
+                  <span class="design-tag design-tag-a">Social options above fold</span>
+                  <span class="design-tag design-tag-a">Minimal friction</span>
+                </div>
+              </div>
+
+              <!-- Design B -->
+              <div class="design-option card card-glow" id="dopt-b" data-choice="B" tabindex="0" role="button" aria-pressed="false" aria-label="Select Design B">
+                <div class="design-select-indicator">Selected ✓</div>
+                <div class="design-label-badge">Design B — Trust-First</div>
+                <div class="mock-screen mock-b">
+                  <div class="mock-hero-img"></div>
+                  <div class="mock-overlay-card">
+                    <div class="mock-tagline-b">🔒 Bank-grade security</div>
+                    <div class="mock-field-b">Enter your email</div>
+                    <div class="mock-field-b">Create password</div>
+                    <div class="mock-btn-b">Get Started Securely →</div>
+                    <div class="mock-social-row">
+                      <div class="mock-icon-btn">G</div>
+                      <div class="mock-icon-btn">🍎</div>
+                      <div class="mock-icon-btn">🔗</div>
+                    </div>
+                    <div class="mock-link" style="font-size:0.6rem;text-align:center;color:#555">256-bit encrypted · SOC2 compliant</div>
+                  </div>
+                </div>
+                <div class="design-meta">
+                  <span class="design-tag design-tag-b">Trust indicators</span>
+                  <span class="design-tag design-tag-b">Fewer fields above fold</span>
+                  <span class="design-tag design-tag-b">Security messaging</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="task-form card" id="ux-explain-form" style="display:none">
+              <label class="form-label" for="ux-explain">Explain your choice (minimum 30 characters)</label>
+              <textarea id="ux-explain" class="form-textarea" rows="4" placeholder="What specific design decisions made you choose this one? Think about the user's mental state when signing up for a fintech app..."></textarea>
+              <div style="margin-top:1rem">
+                <button class="btn btn-primary" onclick="uxTask1Done()" id="ux-t1-next">Next Task →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Task 2: UX Audit -->
+          <div id="ux-t2" class="sim-task hidden anim-fadeup">
+            <div class="task-header card">
+              <div class="task-num">Task 2 of 3 · UI/UX Design</div>
+              <h2 class="task-title">Find the UX issues in this checkout screen</h2>
+              <p class="task-desc">This is a real e-commerce checkout flow. It has <strong id="audit-total-bugs">4</strong> UX problems — some obvious, some subtle. Click on items you think are problematic. Be careful: not everything is a bug.</p>
+            </div>
+            <div class="ux-audit-grid">
+              <div class="audit-screen card">
+                <div class="audit-mock">
+                  <div class="audit-header">🛒 Checkout · Step 2 of 3</div>
+                  <div class="audit-item" id="audit-1" data-issue="true" tabindex="0" role="button" aria-label="Audit item: Continue to payment button">
+                    <div>Continue to payment</div><div class="audit-badge-ok">Primary CTA</div>
+                  </div>
+                  <div class="audit-item" id="audit-2" data-issue="false" tabindex="0">
+                    <div>Order Summary (3 items)</div>
+                  </div>
+                  <div class="audit-item" id="audit-3" data-issue="true" tabindex="0">
+                    <div style="font-size:0.5rem;color:#333;background:#1a1a1a;padding:2px">Apply promo code</div>
+                  </div>
+                  <div class="audit-item" id="audit-4" data-issue="false" tabindex="0">
+                    <div>Shipping address saved ✓</div>
+                  </div>
+                  <div class="audit-item" id="audit-5" data-issue="true" tabindex="0">
+                    <div style="font-size:0.38rem;color:#666">By clicking you agree to our 47-page Terms, Privacy Policy, and Cookie Policy</div>
+                  </div>
+                  <div class="audit-item" id="audit-6" data-issue="false" tabindex="0">
+                    <div>💳 Card ending in 4242</div>
+                  </div>
+                  <div class="audit-item" id="audit-7" data-issue="true" tabindex="0">
+                    <div style="color:#777;background:#555;padding:4px 8px;border-radius:3px;font-size:0.7rem">Confirm Order</div>
+                  </div>
+                </div>
+              </div>
+              <div class="audit-info card">
+                <h4>🔍 UX Audit Panel</h4>
+                <p>Click on checkout elements you believe contain UX problems. You've found <strong id="audit-found">0</strong>/<strong id="audit-total">4</strong> issues.</p>
+                <div id="audit-feedback-list" class="audit-feedback-list">
+                  <p style="font-size:0.8rem;color:rgba(240,238,255,0.3);font-style:italic">Click elements on the left to flag UX issues...</p>
+                </div>
+                <div class="audit-score-display" id="audit-score">Accuracy: —</div>
+                <button class="btn btn-primary" onclick="uxTask2Done()" id="ux-t2-next" style="margin-top:1rem;width:100%">Next Task →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Task 3: Micro-interaction -->
+          <div id="ux-t3" class="sim-task hidden anim-fadeup">
+            <div class="task-header card">
+              <div class="task-num">Task 3 of 3 · UI/UX Design</div>
+              <h2 class="task-title">A user adds an item to cart. What happens next?</h2>
+              <p class="task-desc">You're designing the feedback after a user clicks "Add to Cart" on a mobile shopping app. The app has already established a clean, minimal aesthetic. Which micro-interaction fits best?</p>
+            </div>
+            <div class="micro-options">
+              <div class="micro-option card" data-val="modal" tabindex="0" role="button" aria-pressed="false" id="micro-modal">
+                <div class="micro-preview">
+                  <div class="mini-modal">
+                    <div class="mini-modal-icon">🎉</div>
+                    <div class="mini-modal-text">Added to Cart!</div>
+                    <div class="mini-modal-btn">View Cart</div>
+                    <div class="mini-modal-btn-2">Continue Shopping</div>
+                  </div>
+                </div>
+                <div class="micro-label">A — Full Modal Dialog</div>
+                <div class="micro-desc">A modal appears confirming the addition with View Cart / Continue Shopping options.</div>
+              </div>
+
+              <div class="micro-option card" data-val="toast" tabindex="0" role="button" aria-pressed="false" id="micro-toast">
+                <div class="micro-preview">
+                  <div class="mini-toast" style="display:flex;align-items:center;gap:0.5rem">
+                    <span>🛒</span> "Nike Air Max added" <span style="color:var(--violet-l);font-weight:700">View</span>
+                  </div>
+                </div>
+                <div class="micro-label">B — Toast Notification</div>
+                <div class="micro-desc">A small toast appears for 3 seconds at the top, with a quick "View" link. User stays in flow.</div>
+              </div>
+
+              <div class="micro-option card" data-val="anim" tabindex="0" role="button" aria-pressed="false" id="micro-anim">
+                <div class="micro-preview">
+                  <div class="mini-cart-anim">
+                    <span>👟</span>
+                    <div class="anim-arrow">→</div>
+                    <span>🛒</span>
+                  </div>
+                </div>
+                <div class="micro-label">C — Cart Animation</div>
+                <div class="micro-desc">The item flies from button to the cart icon. Cart count increments. No interruption to browsing.</div>
+              </div>
+
+              <div class="micro-option card" data-val="none" tabindex="0" role="button" aria-pressed="false" id="micro-none">
+                <div class="micro-preview">
+                  <div class="mini-nothing">
+                    <div class="nothing-icon">🔇</div>
+                    <div class="nothing-text">Cart count: 1</div>
+                  </div>
+                </div>
+                <div class="micro-label">D — Silent Count Update</div>
+                <div class="micro-desc">Only the cart badge number changes. Minimal, no animation, no interruption whatsoever.</div>
+              </div>
+            </div>
+
+            <div class="task-form card" id="micro-explain-form" style="display:none">
+              <label class="form-label" for="micro-explain">What's your UX reasoning?</label>
+              <textarea id="micro-explain" class="form-textarea" rows="3" placeholder="Consider the context: mobile, minimal aesthetic, browsing intent. Why does your chosen option work best here?"></textarea>
+              <div style="margin-top:1rem">
+                <button class="btn btn-primary" onclick="uxSimDone()" id="ux-done-btn">Complete Simulation →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end sim-ux -->
+
+        <!-- ════════════════════ PM ════════════════════ -->
+        <div id="sim-pm" class="sim-career hidden">
+
+          <!-- PM Task 1: Feature Prioritization -->
+          <div id="pm-t1" class="sim-task anim-fadeup">
+            <div class="task-header card">
+              <div class="task-num">Task 1 of 2 · Product Management</div>
+              <h2 class="task-title">FoodieGo Sprint Planning — Pick 2 features</h2>
+              <p class="task-desc" id="pm-t1-desc">You're PM at FoodieGo, a food delivery startup. Users filed 5 complaints last week. You have capacity for exactly 2 features this sprint. Which 2 do you ship?</p>
+              <div class="diff-hint" id="pm-diff-hint"></div>
+            </div>
+            <div class="pm-complaints card">
+              <div class="complaint-header">
+                <div>Complaint</div>
+                <div>Volume</div>
+                <div>Impact</div>
+                <div>Action</div>
+              </div>
+              <div class="complaint-item" id="comp-1" data-id="1">
+                <span class="comp-drag">⠿</span>
+                <div class="comp-text">App crashes when driver rates the delivery (affects 12% of all completed orders)</div>
+                <span class="comp-badge comp-vol-high">High</span>
+                <span class="comp-badge comp-imp-critical">Critical Bug</span>
+                <button class="priority-btn" id="btn-1" onclick="togglePriority('1', this)" aria-label="Select feature 1">Pick This</button>
+              </div>
+              <div class="complaint-item" id="comp-2" data-id="2">
+                <span class="comp-drag">⠿</span>
+                <div class="comp-text">Users want a dark mode option (requested on social media 220 times this month)</div>
+                <span class="comp-badge comp-vol-med">Medium</span>
+                <span class="comp-badge comp-imp-nice">Nice-to-Have</span>
+                <button class="priority-btn" id="btn-2" onclick="togglePriority('2', this)" aria-label="Select feature 2">Pick This</button>
+              </div>
+              <div class="complaint-item" id="comp-3" data-id="3">
+                <span class="comp-drag">⠿</span>
+                <div class="comp-text">Payment processing takes 8-12 seconds to confirm — users think it's failing (30% abandon)</div>
+                <span class="comp-badge comp-vol-high">High</span>
+                <span class="comp-badge comp-imp-critical">Revenue Risk</span>
+                <button class="priority-btn" id="btn-3" onclick="togglePriority('3', this)" aria-label="Select feature 3">Pick This</button>
+              </div>
+              <div class="complaint-item" id="comp-4" data-id="4">
+                <span class="comp-drag">⠿</span>
+                <div class="comp-text">No option to schedule orders in advance (restaurants requested this feature)</div>
+                <span class="comp-badge comp-vol-low">Low</span>
+                <span class="comp-badge comp-imp-feature">New Feature</span>
+                <button class="priority-btn" id="btn-4" onclick="togglePriority('4', this)" aria-label="Select feature 4">Pick This</button>
+              </div>
+              <div class="complaint-item" id="comp-5" data-id="5">
+                <span class="comp-drag">⠿</span>
+                <div class="comp-text">App doesn't remember your last 3 restaurants — users have to search every time</div>
+                <span class="comp-badge comp-vol-med">Medium</span>
+                <span class="comp-badge comp-imp-improve">UX Improvement</span>
+                <button class="priority-btn" id="btn-5" onclick="togglePriority('5', this)" aria-label="Select feature 5">Pick This</button>
+              </div>
+              <div class="selected-features">
+                <h4>Your Sprint (<span id="selected-count">0</span>/2 selected):</h4>
+                <div class="selected-list" id="selected-list">
+                  <div class="selected-placeholder">No features selected yet. Pick exactly 2.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="task-form card">
+              <label class="form-label" for="pm-explain">Why did you choose these 2? Think like a PM.</label>
+              <textarea id="pm-explain" class="form-textarea" rows="4" placeholder="Consider: user impact, revenue risk, engineering effort, and what happens if you DON'T fix this sprint..."></textarea>
+              <div style="margin-top:1rem">
+                <button class="btn btn-primary" onclick="pmTask1Done()" id="pm-t1-next">Next Task →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PM Task 2: Success Metrics -->
+          <div id="pm-t2" class="sim-task hidden anim-fadeup">
+            <div class="task-header card">
+              <div class="task-num">Task 2 of 2 · Product Management</div>
+              <h2 class="task-title">How will you measure success?</h2>
+              <p class="task-desc">You shipped the payment slowdown fix. Sprint complete. Now your CEO asks: "How do we know it worked?" Select the metrics you'd track. (Pick all that apply — but think carefully: some are noise.)</p>
+            </div>
+            <div class="metrics-grid">
+              <div class="metric-option card" data-val="payment_success" data-good="true" tabindex="0" role="button" id="met-1">
+                <div class="metric-icon">✅</div>
+                <div class="metric-name">Payment Success Rate</div>
+                <div class="metric-desc">% of payment attempts that complete successfully</div>
+              </div>
+              <div class="metric-option card" data-val="checkout_time" data-good="true" tabindex="0" role="button" id="met-2">
+                <div class="metric-icon">⏱️</div>
+                <div class="metric-name">Time to Payment Confirm</div>
+                <div class="metric-desc">Seconds from "Pay" click to confirmation screen</div>
+              </div>
+              <div class="metric-option card" data-val="app_reviews" data-good="false" tabindex="0" role="button" id="met-3">
+                <div class="metric-icon">⭐</div>
+                <div class="metric-name">App Store Rating</div>
+                <div class="metric-desc">Overall star rating in App Store / Play Store</div>
+              </div>
+              <div class="metric-option card" data-val="checkout_abandon" data-good="true" tabindex="0" role="button" id="met-4">
+                <div class="metric-icon">🚪</div>
+                <div class="metric-name">Checkout Abandonment Rate</div>
+                <div class="metric-desc">% of users who start checkout but don't complete it</div>
+              </div>
+              <div class="metric-option card" data-val="social_mentions" data-good="false" tabindex="0" role="button" id="met-5">
+                <div class="metric-icon">💬</div>
+                <div class="metric-name">Social Media Mentions</div>
+                <div class="metric-desc">Volume of brand mentions on Twitter/Instagram</div>
+              </div>
+              <div class="metric-option card" data-val="support_tickets" data-good="true" tabindex="0" role="button" id="met-6">
+                <div class="metric-icon">🎫</div>
+                <div class="metric-name">Payment-Related Support Tickets</div>
+                <div class="metric-desc">Volume of support requests mentioning payment issues</div>
+              </div>
+            </div>
+            <div class="metric-feedback card" id="metric-feedback" style="display:none"></div>
+            <div style="margin-top:var(--s-8)">
+              <button class="btn btn-primary" onclick="pmSimDone()" id="pm-done-btn">Complete Simulation →</button>
+            </div>
+          </div>
+        </div>
+        <!-- end sim-pm -->
+
+        <!-- ════════════════════ FRONTEND ════════════════════ -->
+        <div id="sim-fe" class="sim-career hidden">
+
+          <!-- FE Task 1: Bug Hunt -->
+          <div id="fe-t1" class="sim-task anim-fadeup">
+            <div class="task-header card">
+              <div class="task-num">Task 1 of 2 · Frontend Development</div>
+              <h2 class="task-title">Find the bugs in this HTML/CSS code</h2>
+              <p class="task-desc">This code is from a real landing page. It has <strong>4 bugs</strong> — some HTML, some CSS. Click on the line you think contains the bug. You'll know immediately if you're right.</p>
+              <div class="diff-hint" id="fe-diff-hint"></div>
+            </div>
+            <div class="code-challenge">
+              <div class="code-editor">
+                <div class="editor-header">
+                  <div class="editor-dot red"></div>
+                  <div class="editor-dot yellow"></div>
+                  <div class="editor-dot green"></div>
+                  <span class="editor-filename">index.html + styles.css</span>
+                </div>
+                <div class="code-lines">
+                  <div class="code-line" data-line="1"  data-bug="false" tabindex="0"><span class="ln">1</span><code class="code"><span class="kw">&lt;!DOCTYPE</span> <span class="attr">html</span><span class="kw">&gt;</span></code></div>
+                  <div class="code-line" data-line="2"  data-bug="false" tabindex="0"><span class="ln">2</span><code class="code"><span class="kw">&lt;html</span> <span class="attr">lang</span>=<span class="str">"en"</span><span class="kw">&gt;</span></code></div>
+                  <div class="code-line" data-line="3"  data-bug="false" tabindex="0"><span class="ln">3</span><code class="code"><span class="kw">&lt;head&gt;</span></code></div>
+                  <div class="code-line" data-line="4"  data-bug="true"  tabindex="0"><span class="ln">4</span><code class="code">&nbsp;&nbsp;<span class="kw">&lt;meta</span> <span class="attr">charset</span>=<span class="str">"UTF-8"</span><span class="kw">&gt;</span><span class="comm">  ← void element</span></code></div>
+                  <div class="code-line" data-line="5"  data-bug="false" tabindex="0"><span class="ln">5</span><code class="code">&nbsp;&nbsp;<span class="kw">&lt;title&gt;</span>My App<span class="kw">&lt;/title&gt;</span></code></div>
+                  <div class="code-line" data-line="6"  data-bug="false" tabindex="0"><span class="ln">6</span><code class="code"><span class="kw">&lt;/head&gt;</span></code></div>
+                  <div class="code-line" data-line="7"  data-bug="false" tabindex="0"><span class="ln">7</span><code class="code"><span class="comm">/* styles.css */</span></code></div>
+                  <div class="code-line" data-line="8"  data-bug="true"  tabindex="0"><span class="ln">8</span><code class="code"><span class="prop">background-color</span>: <span class="val">##1a1a2e</span>;<span class="comm"> ← double hash</span></code></div>
+                  <div class="code-line" data-line="9"  data-bug="false" tabindex="0"><span class="ln">9</span><code class="code"><span class="prop">color</span>: <span class="val">#ffffff</span>;</code></div>
+                  <div class="code-line" data-line="10" data-bug="false" tabindex="0"><span class="ln">10</span><code class="code"><span class="prop">padding</span>: <span class="val">16px 24px</span>;</code></div>
+                  <div class="code-line" data-line="11" data-bug="false" tabindex="0"><span class="ln">11</span><code class="code"><span class="prop">margin</span>: <span class="val">0 auto</span>;</code></div>
+                  <div class="code-line" data-line="12" data-bug="false" tabindex="0"><span class="ln">12</span><code class="code"><span class="prop">max-width</span>: <span class="val">1200px</span>;</code></div>
+                  <div class="code-line" data-line="13" data-bug="true"  tabindex="0"><span class="ln">13</span><code class="code"><span class="prop">font-size</span>: <span class="val">16</span>;<span class="comm"> ← missing unit</span></code></div>
+                  <div class="code-line" data-line="14" data-bug="false" tabindex="0"><span class="ln">14</span><code class="code"><span class="prop">line-height</span>: <span class="val">1.5</span>;</code></div>
+                  <div class="code-line" data-line="15" data-bug="false" tabindex="0"><span class="ln">15</span><code class="code"><span class="sel">.hero</span> {</code></div>
+                  <div class="code-line" data-line="16" data-bug="false" tabindex="0"><span class="ln">16</span><code class="code">&nbsp;&nbsp;<span class="prop">display</span>: <span class="val">flex</span>;</code></div>
+                  <div class="code-line" data-line="17" data-bug="false" tabindex="0"><span class="ln">17</span><code class="code">&nbsp;&nbsp;<span class="prop">align-items</span>: <span class="val">center</span>;</code></div>
+                  <div class="code-line" data-line="18" data-bug="false" tabindex="0"><span class="ln">18</span><code class="code">&nbsp;&nbsp;<span class="prop">min-height</span>: <span class="val">100vh</span>;</code></div>
+                  <div class="code-line" data-line="19" data-bug="false" tabindex="0"><span class="ln">19</span><code class="code">}</code></div>
+                  <div class="code-line" data-line="20" data-bug="false" tabindex="0"><span class="ln">20</span><code class="code"><span class="comm">/* Back in HTML: */</span></code></div>
+                  <div class="code-line" data-line="21" data-bug="true"  tabindex="0"><span class="ln">21</span><code class="code"><span class="kw">&lt;h1&gt;</span>Welcome<span class="kw">&lt;/h2&gt;</span><span class="comm"> ← tag mismatch</span></code></div>
+                  <div class="code-line" data-line="22" data-bug="false" tabindex="0"><span class="ln">22</span><code class="code"><span class="kw">&lt;p&gt;</span>Hello, world!<span class="kw">&lt;/p&gt;</span></code></div>
+                  <div class="code-line" data-line="23" data-bug="false" tabindex="0"><span class="ln">23</span><code class="code"><span class="kw">&lt;/html&gt;</span></code></div>
+                </div>
+              </div>
+              <div class="bug-tracker card">
+                <h4 class="bug-tracker-title">🐛 Bug Tracker</h4>
+                <div class="bug-score">Bugs found: <span id="bugs-found">0</span>/4</div>
+                <div class="found-bugs-list" id="found-bugs-list">
+                  <div class="found-bug-placeholder">Click on buggy lines in the code →</div>
+                </div>
+                <div class="tracker-hint" id="tracker-hint">
+                  <p style="font-size:0.75rem;color:rgba(240,238,255,0.3);margin-top:auto;line-height:1.6">
+                    💡 Click a flagged line again to unflag it.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:var(--s-8)">
+              <button class="btn btn-primary" onclick="feTask1Done()" id="fe-t1-next">Next Task →</button>
+            </div>
+          </div>
+
+          <!-- FE Task 2: CSS Improvement -->
+          <div id="fe-t2" class="sim-task hidden anim-fadeup">
+            <div class="task-header card">
+              <div class="task-num">Task 2 of 2 · Frontend Development</div>
+              <h2 class="task-title">Improve this terrible button</h2>
+              <p class="task-desc">This is real CSS someone wrote. It renders a button so bad users wouldn't click it. Select all improvements you'd apply. Some options will help — others will make it worse.</p>
+            </div>
+            <div class="button-improve">
+              <div class="bad-button-preview card">
+                <h4>Current button (don't ship this 😬)</h4>
+                <button class="bad-button" aria-label="Example bad button">click here</button>
+                <pre class="bad-css">button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px;
+  font-size: 10px;
+  font-family: 'Comic Sans MS';
+  cursor: pointer;
+}</pre>
+              </div>
+              <div class="improvements-list">
+                <h4>Which improvements would you apply?</h4>
+                <div class="improve-option" data-good="true" tabindex="0" role="checkbox" aria-checked="false" id="imp-1">
+                  <div class="improve-icon" aria-hidden="true">+</div>
+                  <div><div class="improve-name">Increase padding (12px 24px)</div><div class="improve-desc">Gives the button breathing room and makes it easier to tap on mobile</div></div>
+                </div>
+                <div class="improve-option" data-good="true" tabindex="0" role="checkbox" aria-checked="false" id="imp-2">
+                  <div class="improve-icon" aria-hidden="true">+</div>
+                  <div><div class="improve-name">Change font to system-ui / Inter</div><div class="improve-desc">Comic Sans destroys credibility — any system font is better</div></div>
+                </div>
+                <div class="improve-option" data-good="false" tabindex="0" role="checkbox" aria-checked="false" id="imp-3">
+                  <div class="improve-icon" aria-hidden="true">+</div>
+                  <div><div class="improve-name">Add a border: 3px dashed yellow</div><div class="improve-desc">Dashed yellow borders add visual interest and make buttons pop</div></div>
+                </div>
+                <div class="improve-option" data-good="true" tabindex="0" role="checkbox" aria-checked="false" id="imp-4">
+                  <div class="improve-icon" aria-hidden="true">+</div>
+                  <div><div class="improve-name">Add border-radius: 6px</div><div class="improve-desc">Rounded corners feel modern and are easier to target on touchscreens</div></div>
+                </div>
+                <div class="improve-option" data-good="true" tabindex="0" role="checkbox" aria-checked="false" id="imp-5">
+                  <div class="improve-icon" aria-hidden="true">+</div>
+                  <div><div class="improve-name">Increase font-size to 14-16px</div><div class="improve-desc">10px text fails WCAG accessibility minimums — most users can't read it</div></div>
+                </div>
+                <div class="improve-option" data-good="false" tabindex="0" role="checkbox" aria-checked="false" id="imp-6">
+                  <div class="improve-icon" aria-hidden="true">+</div>
+                  <div><div class="improve-name">Add font-weight: 100 (thin)</div><div class="improve-desc">Ultra-thin weights on buttons create elegant, minimal aesthetics</div></div>
+                </div>
+                <div class="improve-option" data-good="true" tabindex="0" role="checkbox" aria-checked="false" id="imp-7">
+                  <div class="improve-icon" aria-hidden="true">+</div>
+                  <div><div class="improve-name">Add :hover transition + transform: scale(1.02)</div><div class="improve-desc">Provides visual feedback that the button is interactive</div></div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:var(--s-6)">
+              <button class="btn btn-primary" onclick="feSimDone()" id="fe-done-btn">Complete Simulation →</button>
+            </div>
+          </div>
+        </div>
+        <!-- end sim-fe -->
+
+        <!-- ════════════════════ DATA ANALYTICS ════════════════════ -->
+        <div id="sim-da" class="sim-career hidden">
+          <div id="da-t1" class="sim-task anim-fadeup">
+            <div class="task-header card">
+              <div class="task-num">Task 1 of 2 · Data Analytics</div>
+              <h2 class="task-title">Spot the misleading chart</h2>
+              <p class="task-desc">Your manager shows you 4 charts about your product's performance. One of them is technically accurate but deliberately misleading. Which chart should you question?</p>
+              <div class="diff-hint" id="da-diff-hint"></div>
+            </div>
+            <div class="charts-grid" id="da-charts-grid">
+              <div class="chart-card card" data-misleading="false" tabindex="0" role="button" id="da-chart-1">
+                <div class="chart-title">A — Monthly Active Users</div>
+                <div class="chart-visual">
+                  <div class="bar-chart">
+                    <div class="bar-group">
+                      <div class="chart-bar" style="height:40%;background:rgba(124,58,237,0.6)"><span>8K</span></div>
+                      <div class="chart-bar" style="height:55%;background:rgba(124,58,237,0.7)"><span>11K</span></div>
+                      <div class="chart-bar" style="height:70%;background:rgba(124,58,237,0.8)"><span>14K</span></div>
+                      <div class="chart-bar" style="height:80%;background:rgba(124,58,237,0.9)"><span>16K</span></div>
+                    </div>
+                    <div class="bar-labels"><span>Q1</span><span>Q2</span><span>Q3</span><span>Q4</span></div>
+                    <div class="chart-axis">Y-axis starts at 0</div>
+                  </div>
+                </div>
+                <div class="chart-caption">Honest growth chart — Y-axis starts at 0</div>
+              </div>
+              <div class="chart-card card" data-misleading="true" tabindex="0" role="button" id="da-chart-2">
+                <div class="chart-title">B — Revenue Growth "Rocket 🚀"</div>
+                <div class="chart-visual">
+                  <div class="bar-chart">
+                    <div class="bar-group">
+                      <div class="chart-bar" style="height:30%;background:rgba(245,158,11,0.6)"><span>$98K</span></div>
+                      <div class="chart-bar" style="height:60%;background:rgba(245,158,11,0.75)"><span>$101K</span></div>
+                      <div class="chart-bar" style="height:80%;background:rgba(245,158,11,0.85)"><span>$103K</span></div>
+                      <div class="chart-bar" style="height:99%;background:rgba(245,158,11,0.95)"><span>$104K</span></div>
+                    </div>
+                    <div class="bar-labels"><span>Q1</span><span>Q2</span><span>Q3</span><span>Q4</span></div>
+                    <div class="chart-axis" style="color:#f87171">Y-axis starts at $97K!</div>
+                  </div>
+                </div>
+                <div class="chart-caption">Actual change: +6% over the year</div>
+              </div>
+              <div class="chart-card card" data-misleading="false" tabindex="0" role="button" id="da-chart-3">
+                <div class="chart-title">C — Churn Rate</div>
+                <div class="chart-visual">
+                  <div class="line-chart">
+                    <svg viewBox="0 0 200 80" style="width:100%;height:80px">
+                      <polyline points="10,60 50,55 90,48 130,40 170,30 200,25" fill="none" stroke="rgba(6,182,212,0.8)" stroke-width="2.5" stroke-linecap="round"/>
+                      <line x1="10" y1="0" x2="10" y2="80" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                      <line x1="10" y1="80" x2="200" y2="80" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                    </svg>
+                    <div class="line-labels"><span>Jan</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Nov</span></div>
+                  </div>
+                </div>
+                <div class="chart-caption">Churn decreasing — good sign</div>
+              </div>
+              <div class="chart-card card" data-misleading="false" tabindex="0" role="button" id="da-chart-4">
+                <div class="chart-title">D — NPS Score Trend</div>
+                <div class="chart-visual">
+                  <div style="display:flex;align-items:flex-end;gap:0.5rem;height:80px;padding-bottom:8px">
+                    <div style="background:rgba(16,185,129,0.5);width:25%;height:45%"></div>
+                    <div style="background:rgba(16,185,129,0.65);width:25%;height:60%"></div>
+                    <div style="background:rgba(16,185,129,0.8);width:25%;height:72%"></div>
+                    <div style="background:rgba(16,185,129,0.9);width:25%;height:80%"></div>
+                  </div>
+                  <div class="chart-axis">NPS: +23 → +41 (2 years)</div>
+                </div>
+                <div class="chart-caption">Steady NPS improvement over 2 years</div>
+              </div>
+            </div>
+            <div class="da-feedback card" id="da-feedback" style="display:none">
+              <h4 id="da-feedback-title"></h4>
+              <p id="da-feedback-text"></p>
+            </div>
+            <div style="margin-top:var(--s-6)">
+              <button class="btn btn-primary" onclick="daTask1Done()" id="da-t1-next">Next Task →</button>
+            </div>
+          </div>
+
+          <!-- DA Task 2: Funnel Analysis -->
+          <div id="da-t2" class="sim-task hidden anim-fadeup">
+            <div class="task-header card">
+              <div class="task-num">Task 2 of 2 · Data Analytics</div>
+              <h2 class="task-title">What does this funnel tell you?</h2>
+              <p class="task-desc">Here's the checkout funnel data for an e-commerce site. Analyze it and select what you'd recommend to the product team.</p>
+            </div>
+            <div class="funnel-visual card">
+              <div class="funnel-stage" style="width:100%">
+                <div class="funnel-bar" style="background:rgba(124,58,237,0.7);width:100%">
+                  <span class="funnel-label">Visited Product Page</span>
+                  <span class="funnel-num">10,000</span>
+                </div>
+              </div>
+              <div class="funnel-drop">▼ 40% drop</div>
+              <div class="funnel-stage" style="width:60%">
+                <div class="funnel-bar" style="background:rgba(59,130,246,0.7);width:100%">
+                  <span class="funnel-label">Clicked Add to Cart</span>
+                  <span class="funnel-num">6,000</span>
+                </div>
+              </div>
+              <div class="funnel-drop">▼ 50% drop</div>
+              <div class="funnel-stage" style="width:30%">
+                <div class="funnel-bar" style="background:rgba(245,158,11,0.7);width:100%">
+                  <span class="funnel-label">Reached Checkout</span>
+                  <span class="funnel-num">3,000</span>
+                </div>
+              </div>
+              <div class="funnel-drop" style="color:#f87171">▼ 83% drop ⚠️</div>
+              <div class="funnel-stage" style="width:5%">
+                <div class="funnel-bar" style="background:rgba(244,63,94,0.8);width:100%">
+                  <span class="funnel-label">Completed Purchase</span>
+                  <span class="funnel-num">500</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="da-insights-options">
+              <h4 style="margin-bottom:var(--s-4);font-size:0.9rem;color:rgba(240,238,255,0.6)">Select all observations that are valid:</h4>
+              <div class="insight-choice" data-good="true" tabindex="0" role="checkbox" id="dai-1">
+                <div class="ic-check" aria-hidden="true">○</div>
+                <div>The biggest problem is checkout abandonment (83% drop) — this is where to focus first</div>
+              </div>
+              <div class="insight-choice" data-good="false" tabindex="0" role="checkbox" id="dai-2">
+                <div class="ic-check" aria-hidden="true">○</div>
+                <div>The 40% product page drop is the most critical issue — fix that first</div>
+              </div>
+              <div class="insight-choice" data-good="true" tabindex="0" role="checkbox" id="dai-3">
+                <div class="ic-check" aria-hidden="true">○</div>
+                <div>An overall 5% conversion rate is worth comparing against industry benchmarks (typically 1–4%)</div>
+              </div>
+              <div class="insight-choice" data-good="false" tabindex="0" role="checkbox" id="dai-4">
+                <div class="ic-check" aria-hidden="true">○</div>
+                <div>Since 6,000 people added to cart, the product is clearly solving a problem — no further investigation needed</div>
+              </div>
+              <div class="insight-choice" data-good="true" tabindex="0" role="checkbox" id="dai-5">
+                <div class="ic-check" aria-hidden="true">○</div>
+                <div>We need more data: device type, session recording, or exit survey to understand WHY checkout drops happen</div>
+              </div>
+            </div>
+
+            <div style="margin-top:var(--s-8)">
+              <button class="btn btn-primary" onclick="daSimDone()" id="da-done-btn">Complete Simulation →</button>
+            </div>
+          </div>
+        </div>
+        <!-- end sim-da -->
+
+        <!-- ════════════════════ CONTENT STRATEGY ════════════════════ -->
+        <div id="sim-cs" class="sim-career hidden">
+          <div id="cs-t1" class="sim-task anim-fadeup">
+            <div class="task-header card">
+              <div class="task-num">Task 1 of 2 · Content Strategy</div>
+              <h2 class="task-title">Fix this brand's voice</h2>
+              <p class="task-desc">You've just joined as content strategist for Luminary — a mindfulness app targeting 20-35 year olds. The current copy feels corporate and stiff. Rewrite the hero headline to match the brand voice.</p>
+              <div class="diff-hint" id="cs-diff-hint"></div>
+            </div>
+            <div class="cs-voice-grid">
+              <div class="voice-brief card">
+                <h4>📋 Brand Brief</h4>
+                <div class="brief-item"><strong>Tone:</strong> Warm, grounded, honest. Like a trusted friend who meditates.</div>
+                <div class="brief-item"><strong>Avoid:</strong> Corporate jargon, pressure tactics, over-promising</div>
+                <div class="brief-item"><strong>Audience:</strong> Stressed working adults who've tried meditation apps before and quit</div>
+                <div class="brief-item"><strong>Current headline:</strong> <em style="color:#f87171">"Optimize Your Mental Wellness Through Daily Mindfulness Practice Sessions"</em></div>
+              </div>
+              <div class="voice-options card">
+                <h4>Which rewrite best matches the brief?</h4>
+                <div class="voice-option" data-score="low" tabindex="0" id="vo-1">
+                  <div class="vo-radio" aria-hidden="true">○</div>
+                  <div>
+                    <div class="vo-headline">"The Science-Backed Mental Performance Platform"</div>
+                    <div class="vo-tag">Technical, achievement-focused</div>
+                  </div>
+                </div>
+                <div class="voice-option" data-score="high" tabindex="0" id="vo-2">
+                  <div class="vo-radio" aria-hidden="true">○</div>
+                  <div>
+                    <div class="vo-headline">"A few quiet minutes, every day."</div>
+                    <div class="vo-tag">Minimal, honest, accessible</div>
+                  </div>
+                </div>
+                <div class="voice-option" data-score="med" tabindex="0" id="vo-3">
+                  <div class="vo-radio" aria-hidden="true">○</div>
+                  <div>
+                    <div class="vo-headline">"Find Your Calm in 10 Minutes — Guaranteed"</div>
+                    <div class="vo-tag">Clear but makes a guarantee the brand can't keep</div>
+                  </div>
+                </div>
+                <div class="voice-option" data-score="low" tabindex="0" id="vo-4">
+                  <div class="vo-radio" aria-hidden="true">○</div>
+                  <div>
+                    <div class="vo-headline">"🧘 Transform. Transcend. Triumph."</div>
+                    <div class="vo-tag">Alliterative but empty corporate buzz</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="voice-feedback card" id="voice-feedback" style="display:none"></div>
+            <div style="margin-top:var(--s-6)">
+              <button class="btn btn-primary" onclick="csTask1Done()" id="cs-t1-next">Next Task →</button>
+            </div>
+          </div>
+
+          <!-- CS Task 2: Headline A/B -->
+          <div id="cs-t2" class="sim-task hidden anim-fadeup">
+            <div class="task-header card">
+              <div class="task-num">Task 2 of 2 · Content Strategy</div>
+              <h2 class="task-title">Which headline gets more clicks?</h2>
+              <p class="task-desc">You're running an email campaign for an online coding bootcamp. Two headlines are being A/B tested. Based on content strategy principles, which do you predict will perform better and why?</p>
+            </div>
+            <div class="ab-options">
+              <div class="ab-card card" data-choice="A" tabindex="0" role="button" id="ab-a">
+                <div class="ab-label">Version A</div>
+                <div class="ab-headline">"Learn to Code and Land Your Dream Tech Job"</div>
+                <div class="ab-meta">Generic value prop. Common in the category.</div>
+              </div>
+              <div class="ab-vs" aria-hidden="true">VS</div>
+              <div class="ab-card card" data-choice="B" tabindex="0" role="button" id="ab-b">
+                <div class="ab-label">Version B</div>
+                <div class="ab-headline">"From Confused Career to First Dev Job in 6 Months — Here's Exactly How"</div>
+                <div class="ab-meta">Specific, empathetic, promise-driven. Uses "you".</div>
+              </div>
+            </div>
+            <div class="ab-feedback card" id="ab-feedback" style="display:none"></div>
+            <div class="task-form card">
+              <label class="form-label" for="cs-explain">Explain your content strategy reasoning:</label>
+              <textarea id="cs-explain" class="form-textarea" rows="3" placeholder="Think about: specificity, empathy, what resonates with someone considering a big life change..."></textarea>
+              <div style="margin-top:1rem">
+                <button class="btn btn-primary" onclick="csSimDone()" id="cs-done-btn">Complete Simulation →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end sim-cs -->
+
+        <!-- ════════════ ENTREPRENEURSHIP ════════════ -->
+        <div id="sim-entrepreneurship" class="sim-career hidden">
+          <div id="ent-t1" class="sim-task anim-fadeup">
+            <div class="task-header card">
+              <div class="task-num">Task 1 of 2 · Entrepreneurship</div>
+              <h2 class="task-title">Validate this startup idea — or kill it</h2>
+              <p class="task-desc">A friend pitches you their startup: <strong>"An app that sends you a daily email digest of the best Reddit threads in your interest areas."</strong> You have 3 validation questions you can ask 10 potential users. Choose wisely.</p>
+              <div class="diff-hint" id="ent-diff-hint"></div>
+            </div>
+            <div class="ent-questions">
+              <p style="font-size:0.875rem;color:rgba(240,238,255,0.5);margin-bottom:var(--s-5)">Select your 3 best validation questions:</p>
+              <div class="ent-q card" data-good="true" tabindex="0" id="eq-1">
+                <div class="eq-check" aria-hidden="true">○</div>
+                <div>
+                  <div class="eq-text">"Do you currently browse Reddit daily?"</div>
+                  <div class="eq-why">Validates whether the target user exists</div>
+                </div>
+              </div>
+              <div class="ent-q card" data-good="false" tabindex="0" id="eq-2">
+                <div class="eq-check" aria-hidden="true">○</div>
+                <div>
+                  <div class="eq-text">"Would you pay for a daily email digest of Reddit?"</div>
+                  <div class="eq-why">Hypothetical willingness-to-pay is usually misleading</div>
+                </div>
+              </div>
+              <div class="ent-q card" data-good="true" tabindex="0" id="eq-3">
+                <div class="eq-check" aria-hidden="true">○</div>
+                <div>
+                  <div class="eq-text">"How do you currently discover interesting content online? Walk me through what you did yesterday."</div>
+                  <div class="eq-why">Reveals existing behavior — gold for validation</div>
+                </div>
+              </div>
+              <div class="ent-q card" data-good="false" tabindex="0" id="eq-4">
+                <div class="eq-check" aria-hidden="true">○</div>
+                <div>
+                  <div class="eq-text">"Don't you think email digests of Reddit would be amazing?"</div>
+                  <div class="eq-why">Leading question — produces false positive data</div>
+                </div>
+              </div>
+              <div class="ent-q card" data-good="true" tabindex="0" id="eq-5">
+                <div class="eq-check" aria-hidden="true">○</div>
+                <div>
+                  <div class="eq-text">"Tell me about the last time you missed something important on Reddit. What happened?"</div>
+                  <div class="eq-why">Tests the pain point — the heart of the Mom Test</div>
+                </div>
+              </div>
+              <div class="ent-q card" data-good="false" tabindex="0" id="eq-6">
+                <div class="eq-check" aria-hidden="true">○</div>
+                <div>
+                  <div class="eq-text">"We're building this app — can I add you to our early access list?"</div>
+                  <div class="eq-why">Too early to pitch — still in validation phase</div>
+                </div>
+              </div>
+            </div>
+            <div class="ent-feedback card" id="ent-feedback" style="display:none"></div>
+            <div style="margin-top:var(--s-6)">
+              <button class="btn btn-primary" onclick="entTask1Done()" id="ent-t1-next">Next Task →</button>
+            </div>
+          </div>
+
+          <!-- Ent Task 2: Budget Allocation -->
+          <div id="ent-t2" class="sim-task hidden anim-fadeup">
+            <div class="task-header card">
+              <div class="task-num">Task 2 of 2 · Entrepreneurship</div>
+              <h2 class="task-title">Allocate your ₹5 lakh seed budget</h2>
+              <p class="task-desc">Your startup got ₹5 lakh seed funding. You have 6 months to prove traction before pitching again. How do you allocate? Drag sliders to set your budget split. It must total 100%.</p>
+            </div>
+            <div class="budget-sliders card">
+              <div class="budget-item">
+                <div class="budget-label">
+                  <span>👨‍💻 Product / Dev</span>
+                  <span class="budget-pct" id="budg-dev-pct">40%</span>
+                </div>
+                <input type="range" class="budget-range" id="budg-dev" min="0" max="100" value="40" aria-label="Product/Dev budget">
+                <div class="budget-hint">Building the core product</div>
+              </div>
+              <div class="budget-item">
+                <div class="budget-label">
+                  <span>📣 Marketing / Growth</span>
+                  <span class="budget-pct" id="budg-mkt-pct">25%</span>
+                </div>
+                <input type="range" class="budget-range" id="budg-mkt" min="0" max="100" value="25" aria-label="Marketing budget">
+                <div class="budget-hint">Acquiring first users</div>
+              </div>
+              <div class="budget-item">
+                <div class="budget-label">
+                  <span>🏢 Ops / Admin</span>
+                  <span class="budget-pct" id="budg-ops-pct">15%</span>
+                </div>
+                <input type="range" class="budget-range" id="budg-ops" min="0" max="100" value="15" aria-label="Operations budget">
+                <div class="budget-hint">Infrastructure, legal, admin</div>
+              </div>
+              <div class="budget-item">
+                <div class="budget-label">
+                  <span>🔬 User Research</span>
+                  <span class="budget-pct" id="budg-res-pct">10%</span>
+                </div>
+                <input type="range" class="budget-range" id="budg-res" min="0" max="100" value="10" aria-label="Research budget">
+                <div class="budget-hint">Interviews, usability studies</div>
+              </div>
+              <div class="budget-item">
+                <div class="budget-label">
+                  <span>💸 Reserve</span>
+                  <span class="budget-pct" id="budg-rsv-pct">10%</span>
+                </div>
+                <input type="range" class="budget-range" id="budg-rsv" min="0" max="100" value="10" aria-label="Reserve budget">
+                <div class="budget-hint">Emergency buffer</div>
+              </div>
+              <div class="budget-total-row">
+                <span>Total allocated:</span>
+                <span class="budget-total" id="budg-total">100%</span>
+                <span class="budget-warning hidden" id="budg-warning">⚠️ Must equal 100%</span>
+              </div>
+            </div>
+            <div class="task-form card">
+              <label class="form-label" for="ent-explain">Justify your allocation in 1-2 sentences:</label>
+              <textarea id="ent-explain" class="form-textarea" rows="3" placeholder="What's your biggest risk? Where does growth come from in the first 6 months?"></textarea>
+              <div style="margin-top:1rem">
+                <button class="btn btn-primary" onclick="entSimDone()" id="ent-done-btn">Complete Simulation →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end sim-entrepreneurship -->
+
+        <!-- ════════════════ AI/ML ════════════════ -->
+        <div id="sim-aiml" class="sim-career hidden">
+          <div id="ai-t1" class="sim-task anim-fadeup">
+            <div class="task-header card">
+              <div class="task-num">Task 1 of 2 · AI/ML Exploration</div>
+              <h2 class="task-title">Label this training data</h2>
+              <p class="task-desc">You're a data labeler preparing a sentiment analysis dataset for a customer service AI. Each review must be labeled: Positive, Negative, or Neutral. Precision matters — the model learns from your labels.</p>
+              <div class="diff-hint" id="ai-diff-hint"></div>
+            </div>
+            <div class="labeling-grid">
+              <div class="label-row card" id="lr-1">
+                <div class="lr-text">"The product is fine I guess. Does what it says."</div>
+                <div class="lr-buttons">
+                  <button class="lr-btn" data-val="positive" onclick="setLabel(1,'positive',this)">😊 Positive</button>
+                  <button class="lr-btn" data-val="neutral"  onclick="setLabel(1,'neutral',this)">😐 Neutral</button>
+                  <button class="lr-btn" data-val="negative" onclick="setLabel(1,'negative',this)">😞 Negative</button>
+                </div>
+                <div class="lr-feedback" id="lrf-1"></div>
+              </div>
+              <div class="label-row card" id="lr-2">
+                <div class="lr-text">"Absolutely horrible experience. Waited 3 hours, no update, then they cancelled my order."</div>
+                <div class="lr-buttons">
+                  <button class="lr-btn" data-val="positive" onclick="setLabel(2,'positive',this)">😊 Positive</button>
+                  <button class="lr-btn" data-val="neutral"  onclick="setLabel(2,'neutral',this)">😐 Neutral</button>
+                  <button class="lr-btn" data-val="negative" onclick="setLabel(2,'negative',this)">😞 Negative</button>
+                </div>
+                <div class="lr-feedback" id="lrf-2"></div>
+              </div>
+              <div class="label-row card" id="lr-3">
+                <div class="lr-text">"Not what I expected but my husband likes it 🤷"</div>
+                <div class="lr-buttons">
+                  <button class="lr-btn" data-val="positive" onclick="setLabel(3,'positive',this)">😊 Positive</button>
+                  <button class="lr-btn" data-val="neutral"  onclick="setLabel(3,'neutral',this)">😐 Neutral</button>
+                  <button class="lr-btn" data-val="negative" onclick="setLabel(3,'negative',this)">😞 Negative</button>
+                </div>
+                <div class="lr-feedback" id="lrf-3"></div>
+              </div>
+              <div class="label-row card" id="lr-4">
+                <div class="lr-text">"Fast delivery. Good packaging. Would order again."</div>
+                <div class="lr-buttons">
+                  <button class="lr-btn" data-val="positive" onclick="setLabel(4,'positive',this)">😊 Positive</button>
+                  <button class="lr-btn" data-val="neutral"  onclick="setLabel(4,'neutral',this)">😐 Neutral</button>
+                  <button class="lr-btn" data-val="negative" onclick="setLabel(4,'negative',this)">😞 Negative</button>
+                </div>
+                <div class="lr-feedback" id="lrf-4"></div>
+              </div>
+            </div>
+            <div class="ai-label-score card">
+              <span>Labels confirmed: <strong id="labels-done">0</strong>/4</span>
+              <div class="progress-bar" style="flex:1;margin:0 1rem">
+                <div class="progress-fill" id="label-progress" style="width:0%"></div>
+              </div>
+            </div>
+            <div style="margin-top:var(--s-6)">
+              <button class="btn btn-primary" onclick="aiTask1Done()" id="ai-t1-next">Next Task →</button>
+            </div>
+          </div>
+
+          <!-- AI Task 2: Bias Detection -->
+          <div id="ai-t2" class="sim-task hidden anim-fadeup">
+            <div class="task-header card">
+              <div class="task-num">Task 2 of 2 · AI/ML Exploration</div>
+              <h2 class="task-title">Spot the model bias</h2>
+              <p class="task-desc">A hiring company trained an AI to screen resumes. You're reviewing its outputs. Which pattern suggests a serious bias problem?</p>
+            </div>
+            <div class="bias-cards">
+              <div class="bias-card card" data-biased="false" tabindex="0" id="bc-1">
+                <div class="bias-icon">📊</div>
+                <h4>Pattern A</h4>
+                <p>The model rates candidates from IITs and NITs 15% higher than similar candidates from state colleges with identical skills and experience.</p>
+                <div class="bias-tag">Is this bias?</div>
+              </div>
+              <div class="bias-card card" data-biased="false" tabindex="0" id="bc-2">
+                <div class="bias-icon">📍</div>
+                <h4>Pattern B</h4>
+                <p>The model ranks candidates with 3+ years experience higher than fresher candidates for a senior role requiring 3+ years experience.</p>
+                <div class="bias-tag">Is this bias?</div>
+              </div>
+              <div class="bias-card card" data-biased="true" tabindex="0" id="bc-3">
+                <div class="bias-icon">⚧️</div>
+                <h4>Pattern C</h4>
+                <p>The model consistently ranks male candidates 23% higher than female candidates with identical qualifications for engineering roles.</p>
+                <div class="bias-tag">Is this bias?</div>
+              </div>
+              <div class="bias-card card" data-biased="false" tabindex="0" id="bc-4">
+                <div class="bias-icon">🏆</div>
+                <h4>Pattern D</h4>
+                <p>The model ranks candidates with relevant GitHub contributions higher than those without for software engineering positions.</div>
+                <div class="bias-tag">Is this bias?</div>
+              </div>
+            </div>
+            <div class="bias-feedback card" id="bias-feedback" style="display:none"></div>
+            <div style="margin-top:var(--s-6)">
+              <button class="btn btn-primary" onclick="aiSimDone()" id="ai-done-btn">Complete Simulation →</button>
+            </div>
+          </div>
+        </div>
+        <!-- end sim-aiml -->
+
+        <!-- Coming Soon placeholder for unknown careers -->
+        <div id="sim-coming" class="sim-career hidden">
+          <div class="sim-loading">
+            <div style="font-size:4rem">🚧</div>
+            <h3 style="font-family:var(--font-display);font-size:1.5rem">Simulation in Development</h3>
+            <p>This career sandbox is coming soon. Try one of our available simulations!</p>
+            <a href="recommendations.html" class="btn btn-primary" style="margin-top:1rem">← Back to Careers</a>
+          </div>
+        </div>
+
+      </div>
+      <!-- end sim-container -->
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="alert">
+    <span class="toast-icon">✨</span>
+    <span id="toast-message">Loading...</span>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="simulation.js"></script>
+</body>
+</html>

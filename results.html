@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Career Discovery Report – CareerSandbox</title>
+  <meta name="description" content="Your personalized career exploration report: strengths, skill radar, affinities, wellbeing insights." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="results.css" />
+</head>
+<body>
+  <div class="bg-warm" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar" role="navigation">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+          <div class="logo-mark">🧪</div>
+          CareerSandbox
+        </a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="recommendations.html">← All Careers</a>
+          <a href="profile.html">Edit Profile</a>
+        </div>
+        <div class="nav-right" style="display:flex;align-items:center;gap:1rem">
+          <button class="btn btn-ghost btn-sm" onclick="printResults()" id="share-btn" aria-label="Save report">📄 Save Report</button>
+          <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">🏠 Home</a>
+    <a href="recommendations.html">← All Careers</a>
+    <a href="profile.html">👤 Edit Profile</a>
+  </div>
+
+  <main class="results-page" id="main-content">
+    <div class="container">
+
+      <!-- ── Report Header ── -->
+      <div class="report-header">
+        <div class="report-confetti" aria-hidden="true">
+          <span>🎉</span><span>✨</span><span>🌟</span><span>🎊</span><span>💫</span>
+        </div>
+        <div class="pill anim-fadeup"><div class="pill-dot"></div><span>Career Discovery Report</span></div>
+        <h1 class="report-title anim-fadeup" id="results-title" style="animation-delay:0.1s">
+          You've been exploring, <span class="g-text" id="result-name">Explorer</span>!
+        </h1>
+        <p class="report-sub anim-fadeup" style="animation-delay:0.2s">
+          Here's what your exploration revealed. Think of this as a mirror — not a verdict.
+        </p>
+      </div>
+
+      <!-- ── Achievement Cards ── -->
+      <div class="achievement-row">
+        <div class="ach-card ach-engagement anim-fadeup" id="sc-engagement" style="animation-delay:0.1s">
+          <div class="ach-icon">⚡</div>
+          <div class="ach-label">Explorer Energy</div>
+          <div class="ach-num" id="sc-eng-num">—</div>
+          <div class="ach-desc" id="sc-eng-ctx">How actively you engaged</div>
+          <div class="progress-bar" style="margin-top:var(--s-3)">
+            <div class="progress-fill" id="pf-eng" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div class="ach-card ach-confidence anim-fadeup" id="sc-confidence" style="animation-delay:0.15s">
+          <div class="ach-icon">🎯</div>
+          <div class="ach-label">Decision Clarity</div>
+          <div class="ach-num" id="sc-conf-num">—</div>
+          <div class="ach-desc" id="sc-conf-ctx">Accuracy of your choices</div>
+          <div class="progress-bar" style="margin-top:var(--s-3)">
+            <div class="progress-fill" id="pf-conf" style="width:0%;background:var(--grad-warm)"></div>
+          </div>
+        </div>
+
+        <div class="ach-card ach-exploration anim-fadeup" id="sc-exploration" style="animation-delay:0.2s">
+          <div class="ach-icon">🔭</div>
+          <div class="ach-label">Curiosity Depth</div>
+          <div class="ach-num" id="sc-expl-num">—</div>
+          <div class="ach-desc" id="sc-expl-ctx">Breadth of your exploration</div>
+          <div class="progress-bar" style="margin-top:var(--s-3)">
+            <div class="progress-fill" id="pf-expl" style="width:0%;background:var(--grad-sage)"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Session Summary ── -->
+      <div class="session-strip reveal" id="session-strip">
+        <div class="ss-item">
+          <span class="ss-icon">🎮</span>
+          <span class="ss-label">Career</span>
+          <span class="ss-val" id="sum-career">—</span>
+        </div>
+        <div class="ss-sep"></div>
+        <div class="ss-item">
+          <span class="ss-icon">⏱</span>
+          <span class="ss-label">Time Spent</span>
+          <span class="ss-val" id="sum-time">—</span>
+        </div>
+        <div class="ss-sep"></div>
+        <div class="ss-item">
+          <span class="ss-icon">✅</span>
+          <span class="ss-label">Tasks Done</span>
+          <span class="ss-val" id="sum-tasks">—</span>
+        </div>
+        <div class="ss-sep"></div>
+        <div class="ss-item">
+          <span class="ss-icon">📈</span>
+          <span class="ss-label">Difficulty</span>
+          <span class="ss-val" id="sum-difficulty">—</span>
+        </div>
+        <div class="ss-sep"></div>
+        <div class="ss-item">
+          <span class="ss-icon">🏅</span>
+          <span class="ss-label">Explorer Rank</span>
+          <span class="ss-val g-text" id="sum-rank">—</span>
+        </div>
+      </div>
+
+      <!-- ── Main Discovery Grid ── -->
+      <div class="discovery-grid">
+
+        <!-- Left column -->
+        <div class="dg-left">
+
+          <!-- Career Affinity Map -->
+          <div class="discovery-card reveal" id="affinity-section">
+            <div class="dc-header">
+              <div class="dc-header-icon" style="background:var(--lavender-xl)">🗺️</div>
+              <div>
+                <h2 class="dc-title">Career Affinity Map</h2>
+                <p class="dc-sub">Based on your profile + simulation performance</p>
+              </div>
+            </div>
+            <div id="career-bars-container">
+              <div class="loading-spinner" style="margin:2rem auto"></div>
+            </div>
+          </div>
+
+          <!-- Skill Radar -->
+          <div class="discovery-card reveal" id="radar-section" style="transition-delay:0.1s">
+            <div class="dc-header">
+              <div class="dc-header-icon" style="background:var(--rose-l)">🕸️</div>
+              <div>
+                <h2 class="dc-title">Skill Tendency Radar</h2>
+                <p class="dc-sub">A snapshot of how you approached tasks</p>
+              </div>
+            </div>
+            <div class="radar-wrap">
+              <canvas id="radar-canvas" width="340" height="300" aria-label="Skill radar chart"></canvas>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right column -->
+        <div class="dg-right">
+
+          <!-- Observations (like journal entries) -->
+          <div class="discovery-card reveal" id="insights-section">
+            <div class="dc-header">
+              <div class="dc-header-icon" style="background:#FEF3C7">🪞</div>
+              <div>
+                <h2 class="dc-title">What We Observed</h2>
+                <p class="dc-sub" style="font-style:italic">We are a mirror, not an oracle.</p>
+              </div>
+            </div>
+            <div class="insights-list" id="insights-list">
+              <!-- Generated by results.js -->
+            </div>
+          </div>
+
+          <!-- Wellbeing & Clarity -->
+          <div class="discovery-card wellbeing-card reveal" id="wellbeing-section" style="transition-delay:0.05s">
+            <div class="dc-header">
+              <div class="dc-header-icon" style="background:var(--sage-l)">🌱</div>
+              <div>
+                <h2 class="dc-title">Career Clarity & Wellbeing</h2>
+                <p class="dc-sub">How your exploration journey is going</p>
+              </div>
+            </div>
+
+            <div class="wb-grid">
+              <div class="wb-metric">
+                <div class="wb-metric-label">Clarity Score</div>
+                <div class="wb-metric-val" id="wb-clarity-score">—</div>
+                <div class="progress-bar" style="margin-top:var(--s-2)">
+                  <div class="progress-fill" id="wb-clarity-bar" style="width:0%;background:var(--grad-sage)"></div>
+                </div>
+              </div>
+              <div class="wb-metric">
+                <div class="wb-metric-label">Confidence Trend</div>
+                <div class="wb-trend-val" id="wb-confidence-trend">—</div>
+              </div>
+              <div class="wb-metric">
+                <div class="wb-metric-label">Careers Explored</div>
+                <div class="wb-trend-val wellbeing-good" id="wb-careers-tried">—</div>
+              </div>
+              <div class="wb-metric">
+                <div class="wb-metric-label">Exploration Fatigue</div>
+                <div class="wb-fatigue-val" id="wb-fatigue">—</div>
+              </div>
+            </div>
+
+            <div class="wb-focus-rec">
+              <div class="wb-rec-icon">💡</div>
+              <div class="wb-rec-text" id="wb-focus-rec">Loading your wellbeing insights...</div>
+            </div>
+          </div>
+
+          <!-- Keep Exploring CTA -->
+          <div class="discovery-card cta-card reveal" id="results-cta" style="transition-delay:0.1s">
+            <div class="cta-card-emoji" aria-hidden="true">🧭</div>
+            <h3>Keep exploring</h3>
+            <p>Every simulation you try gives you more clarity. The more you explore, the sharper your self-awareness becomes.</p>
+            <div class="cta-card-actions">
+              <a href="recommendations.html" class="btn btn-primary">Try Another Career</a>
+              <a href="profile.html" class="btn btn-ghost">Edit My Profile</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── Mirror Philosophy Banner ── -->
+      <div class="report-mirror reveal" id="mirror-banner">
+        <div class="rm-emoji" aria-hidden="true">🪞</div>
+        <div class="rm-content">
+          <h3>"We are a mirror, not an oracle."</h3>
+          <p>CareerSandbox reflects what we observed in how you interacted — where you paused, what you chose, how you reasoned. These aren't predictions about your future. They're observations about your present curiosity. Use them as starting points. Question them. Try another simulation and see what changes.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- API badge -->
+  <div class="api-badge" id="api-badge"><div class="api-dot"></div><span id="api-badge-text">Connecting...</span></div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="alert" aria-live="polite">
+    <span class="toast-icon">📊</span>
+    <span id="toast-msg">Generating your report...</span>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="results.js"></script>
+</body>
+</html>
