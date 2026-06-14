@@ -40,5 +40,5 @@ Database:
 
 ## Team
 - Divyanshi Mishra
-- KM
+- Krishna Mishra
 - Praggya Pal
