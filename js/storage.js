@@ -64,7 +64,16 @@ const CS = {
   saveSimScore(career, scores, elapsedSeconds, tasksData) {
     const key = `cs_sim_${career}`;
     const data = { career, scores, elapsedSeconds, tasksData, savedAt: Date.now() };
+    // Save per-career (most recent for that career)
     localStorage.setItem(key, JSON.stringify(data));
+    // Save last-played career so results page survives refresh
+    localStorage.setItem('cs_last_career', career);
+
+    // ── Append to history (max 20 entries) ──
+    const history = this.loadSimHistory();
+    history.unshift({ ...data }); // newest first
+    if (history.length > 20) history.length = 20;
+    localStorage.setItem('cs_sim_history', JSON.stringify(history));
 
     // Update career scores
     const allScores = this.loadCareerScores();
@@ -74,6 +83,22 @@ const CS = {
 
     this.syncSimScore(career, scores, elapsedSeconds, tasksData).catch(() => {});
   },
+
+  loadSimHistory() {
+    try {
+      const raw = localStorage.getItem('cs_sim_history');
+      return raw ? JSON.parse(raw) : [];
+    } catch { return []; }
+  },
+
+  loadLastSim() {
+    // Returns the most recent sim result regardless of career
+    const history = this.loadSimHistory();
+    if (history.length > 0) return history[0];
+    return null;
+  },
+
+
 
   loadSimScore(career) {
     try {

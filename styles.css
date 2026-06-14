@@ -532,3 +532,12 @@ input, select, textarea { font-family: inherit; color: var(--ink); }
   .btn-lg { padding: 0.85rem 1.5rem; font-size: 0.9rem; }
   .step-connector { width: 20px; }
 }
+
+/* ── Global Print ────────────────────────────────────────── */
+@media print {
+  .bg-warm { display: none !important; }
+  .navbar, .mobile-menu, .nav-hamburger { display: none !important; }
+  body { background: white !important; }
+  .toast, .api-badge { display: none !important; }
+}
+

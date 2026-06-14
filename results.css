@@ -189,7 +189,98 @@
 }
 
 @media print {
-  .navbar, .mobile-menu, .api-badge, .toast, .cta-card-actions { display: none !important; }
-  body { background: white; }
-  .results-page { padding: 20px 0; }
+  /* ── Hide all non-content chrome ── */
+  .navbar, .mobile-menu, .api-badge, .toast,
+  .cta-card-actions, .report-confetti, .bg-warm,
+  #share-btn { display: none !important; }
+
+  /* ── Force white everywhere ── */
+  *, *::before, *::after {
+    background: white !important;
+    color: #1a1a2e !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── Body & page setup ── */
+  html, body { background: white !important; margin: 0; }
+  @page { margin: 18mm 16mm; size: A4; }
+
+  .results-page { padding: 0 !important; }
+  .container { max-width: 100% !important; padding: 0 !important; }
+
+  /* ── Achievement cards — restore pastel backgrounds for print ── */
+  .ach-engagement { background: #ede9fe !important; border: 1.5px solid #c4b5fd !important; }
+  .ach-confidence { background: #fce7ef !important; border: 1.5px solid #f4a7b9 !important; }
+  .ach-exploration { background: #dcfce7 !important; border: 1.5px solid #86c490 !important; }
+
+  /* ── Insight cards — restore alternating colors ── */
+  .insight-item:nth-child(1) { background: #ede9fe !important; border: 1px solid #c4b5fd !important; }
+  .insight-item:nth-child(2) { background: #fce7ef !important; border: 1px solid #f4a7b9 !important; }
+  .insight-item:nth-child(3) { background: #dcfce7 !important; border: 1px solid #86c490 !important; }
+  .insight-item:nth-child(4) { background: #fef3c7 !important; border: 1px solid #fdba74 !important; }
+
+  /* ── Mirror banner ── */
+  .report-mirror { background: #ede9fe !important; border: 1.5px solid #c4b5fd !important; }
+
+  /* ── Wellbeing rec box ── */
+  .wb-focus-rec { background: #dcfce7 !important; border: 1.5px solid #86c490 !important; }
+
+  /* ── Discovery grid: single column for print ── */
+  .discovery-grid { grid-template-columns: 1fr !important; }
+
+  /* ── Session strip ── */
+  .session-strip { border: 1.5px solid #e2e0ec !important; }
+
+  /* ── Prevent page breaks inside cards ── */
+  .ach-card, .discovery-card, .session-strip,
+  .insight-item, .wb-focus-rec, .report-mirror,
+  .career-bar-item { break-inside: avoid !important; page-break-inside: avoid !important; }
+
+  /* ── Page break BEFORE major sections ── */
+  .discovery-grid { break-before: auto; }
+  #radar-section { break-before: avoid; }
+  #wellbeing-section { break-before: auto; }
+  .report-mirror { break-before: avoid; margin-top: 16px !important; }
+
+  /* ── Force achievement row to show on one page ── */
+  .achievement-row { break-inside: avoid; page-break-inside: avoid; }
+
+  /* ── Text colors for print ── */
+  .report-title { color: #2D2A3E !important; font-size: 1.8rem !important; }
+  .ach-num { color: #2D2A3E !important; }
+  .cbar-pct { color: #9B8FD4 !important; }
+  .dc-title { color: #2D2A3E !important; }
+  .insight-text, .insight-text strong { color: #2D2A3E !important; }
+  .g-text { background: none !important; -webkit-text-fill-color: #9B8FD4 !important; color: #9B8FD4 !important; }
+
+  /* ── Radar canvas note (canvas doesn't print reliably) ── */
+  #radar-canvas { border: 1px solid #e2e0ec !important; }
+  .radar-wrap::after {
+    content: '(Radar chart renders best when saved as PDF from browser)';
+    display: block; font-size: 0.7rem; color: #9490a8 !important;
+    text-align: center; margin-top: 8px;
+  }
+
+  /* ── Progress bars: show as bordered tracks ── */
+  .progress-bar { border: 1px solid #e2e0ec !important; }
+  .progress-fill { border-radius: 999px !important; }
+  #pf-eng  { background: #9B8FD4 !important; }
+  #pf-conf { background: #F4A7B9 !important; }
+  #pf-expl { background: #86C490 !important; }
+  #wb-clarity-bar { background: #86C490 !important; }
+
+  /* ── Print header watermark ── */
+  .results-page::before {
+    content: 'CareerSandbox — Career Discovery Report';
+    display: block; text-align: center;
+    font-size: 0.72rem; color: #9490a8 !important;
+    border-bottom: 1px solid #e2e0ec !important;
+    padding-bottom: 8px; margin-bottom: 16px;
+  }
 }
+

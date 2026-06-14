@@ -63,6 +63,9 @@ function initSim() {
     if (profile) {
       simState.difficulty = CS.computeDifficultyFromProfile(profile);
       localStorage.setItem('cs_difficulty', simState.difficulty);
+    } else {
+      // No profile — check if stored difficulty exists
+      simState.difficulty = CS.getDifficulty() || 'beginner';
     }
   }
 
@@ -72,10 +75,13 @@ function initSim() {
   document.getElementById('sim-pill-text').textContent = `${simState.career.toUpperCase()} · ${simState.difficulty.charAt(0).toUpperCase() + simState.difficulty.slice(1)}`;
   document.title = meta.title + ' – CareerSandbox';
 
-  // Set difficulty badge
+  // Set difficulty badge IMMEDIATELY (not inside timeout)
   const badge = document.getElementById('diff-badge');
-  badge.textContent = simState.difficulty.charAt(0).toUpperCase() + simState.difficulty.slice(1);
-  badge.className = `diff-badge diff-${simState.difficulty}`;
+  if (badge) {
+    const diffLabel = simState.difficulty.charAt(0).toUpperCase() + simState.difficulty.slice(1);
+    badge.textContent = diffLabel;
+    badge.className = `diff-badge diff-${simState.difficulty}`;
+  }
 
   setTimeout(() => {
     document.getElementById('sim-loading').style.display = 'none';
@@ -96,6 +102,7 @@ function initSim() {
     setProgress(1, meta.tasks);
   }, 900);
 }
+
 
 // ── Timer ──────────────────────────────────────────────────────
 let seconds = 0;

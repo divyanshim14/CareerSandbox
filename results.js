@@ -21,24 +21,41 @@ let careerScores = window.CS ? CS.loadCareerScores() : {};
 let career     = 'ux';
 let elapsed    = 0;
 
-// Try sessionStorage first (most recent sim)
+// Try sessionStorage first (most recent sim — survives same-tab navigation)
 try {
   const raw = sessionStorage.getItem('csSimData');
   if (raw) simData = JSON.parse(raw);
-  career  = sessionStorage.getItem('csSimCareer') || sessionStorage.getItem('cs_career') || 'ux';
+  career  = sessionStorage.getItem('csSimCareer') || sessionStorage.getItem('cs_career') || null;
   elapsed = parseInt(sessionStorage.getItem('csElapsed') || '0');
 } catch { /* ignore */ }
 
-// Try localStorage fallback
+// sessionStorage cleared? (refresh / direct link) — use localStorage persistence
+if (!career) {
+  career = localStorage.getItem('cs_last_career') || 'ux';
+}
+
+// Try last sim from history (survives refresh, gets exact career data)
+if (!simData && window.CS) {
+  const lastSim = CS.loadLastSim();
+  if (lastSim) {
+    simData  = { scores: lastSim.scores, tasks: lastSim.tasksData || {} };
+    elapsed  = lastSim.elapsedSeconds || 0;
+    career   = lastSim.career || career; // ensure correct career
+  }
+}
+
+// Final fallback: load per-career score
 if (!simData && window.CS) {
   const saved = CS.loadSimScore(career);
   if (saved) { simData = { scores: saved.scores, tasks: saved.tasksData || {} }; elapsed = saved.elapsedSeconds || 0; }
 }
 
-// Demo fallback
+// Demo fallback (no data at all)
 if (!simData || !simData.scores) {
   simData = { scores: { engagement: 74, confidence: 68, exploration: 82 }, tasks: {} };
 }
+
+
 
 const scores = simData.scores || { engagement: 65, confidence: 60, exploration: 70 };
 
@@ -442,5 +459,30 @@ checkApi();
 // ── Welcome toast ──────────────────────────────────────────────
 setTimeout(() => showToast('Your exploration report is ready! 🎉', '📊'), 700);
 
-// ── Print ──────────────────────────────────────────────────────
-function printResults() { window.print(); }
+// ── Print / Save Report ─────────────────────────────────────────
+function printResults() {
+  // Ensure all animated numbers are at their final values before print
+  const setFinal = (id, val) => {
+    const el = document.getElementById(id);
+    if (el && val !== undefined) el.textContent = Math.round(val);
+  };
+  setFinal('sc-eng-num',  scores.engagement);
+  setFinal('sc-conf-num', scores.confidence);
+  setFinal('sc-expl-num', scores.exploration);
+
+  // Ensure progress bars are at final width
+  const setBar = (id, pct) => {
+    const el = document.getElementById(id);
+    if (el) el.style.width = Math.min(100, Math.round(pct)) + '%';
+  };
+  setBar('pf-eng',  scores.engagement);
+  setBar('pf-conf', scores.confidence);
+  setBar('pf-expl', scores.exploration);
+
+  // Make all .reveal elements visible for print
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+
+  // Small delay to let browser settle, then print
+  setTimeout(() => { window.print(); }, 500);
+}
+
