@@ -1,5 +1,4 @@
 # CareerSandbox
-# CareerSandbox
 
 Try careers before marrying them.
 
