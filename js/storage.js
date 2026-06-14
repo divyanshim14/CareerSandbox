@@ -2,7 +2,8 @@
 // Handles localStorage persistence + API sync with graceful degradation
 
 const CS = {
-  API_BASE: 'http://localhost:3001/api',
+  // Use relative path so it works on any host (Railway, Render, localhost)
+  API_BASE: '/api',
   _apiAvailable: null,
 
   // ── User ID ─────────────────────────────────────────────────

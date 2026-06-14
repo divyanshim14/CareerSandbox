@@ -197,6 +197,11 @@
   border-bottom: 1.5px solid var(--border); margin-bottom: var(--s-3);
 }
 
+/* On mobile: hide the table header — items go stacked */
+@media (max-width: 640px) {
+  .complaint-header { display: none; }
+}
+
 .complaint-item {
   display: grid; grid-template-columns: auto 1fr 80px 80px 90px;
   gap: var(--s-4); align-items: center;
@@ -205,9 +210,26 @@
   border: 1.5px solid var(--border);
   margin-bottom: var(--s-3); background: var(--bg);
   transition: all var(--t-base);
+  /* Prevent horizontal overflow */
+  min-width: 0; word-break: break-word;
 }
 .complaint-item:hover { background: white; border-color: var(--lavender-l); }
 .complaint-item.selected { background: var(--lavender-xl); border-color: var(--lavender); }
+
+/* Stack complaint items on mobile — no horizontal scroll */
+@media (max-width: 640px) {
+  .complaint-item {
+    display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-3);
+  }
+  .comp-drag { display: none; }
+  .comp-text { font-size: 0.85rem; }
+  .complaint-item .comp-badge {
+    /* badges go inline in a row */
+  }
+  .priority-btn {
+    width: 100%; text-align: center;
+  }
+}
 
 .comp-drag { color: var(--ink-3); cursor: grab; font-size: 1rem; }
 .comp-text { font-size: 0.82rem; color: var(--ink); line-height: 1.55; }
@@ -235,6 +257,9 @@
 
 /* ── PM: Metrics ──────────────────────────────── */
 .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); margin-bottom: var(--s-6); }
+@media (max-width: 640px) {
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+}
 
 .metric-option {
   background: white; cursor: pointer; padding: var(--s-5);
@@ -535,7 +560,72 @@
   .button-improve { grid-template-columns: 1fr; }
   .cs-voice-grid  { grid-template-columns: 1fr; }
   .ab-grid        { grid-template-columns: 1fr; }
+  .charts-grid    { grid-template-columns: 1fr; }
+  .bias-cards     { gap: var(--s-3); }
 }
+
+/* ── Mobile-specific (768px and below) ─────────── */
+@media (max-width: 768px) {
+  /* Prevent ANY horizontal scroll on the page */
+  .sim-page { overflow-x: hidden; }
+  .sim-container { overflow-x: hidden; }
+
+  /* Task header padding */
+  .task-header { padding: var(--s-4) var(--s-5); }
+  .task-title { font-size: 1.1rem; }
+
+  /* PM complaints: already stacked at 640px */
+  .pm-complaints { padding: var(--s-4); overflow-x: hidden; }
+
+  /* Code editor: horizontal scroll inside, contained */
+  .code-editor { overflow-x: auto; }
+  .code-lines  { min-width: 480px; }
+
+  /* Charts: single column, no overflow */
+  .charts-grid { grid-template-columns: 1fr; gap: var(--s-4); }
+  .chart-card  { overflow: hidden; }
+  .bar-chart   { overflow: hidden; }
+
+  /* Funnel: full width stages */
+  .funnel-stage { width: 100% !important; }
+  .funnel-bar   { font-size: 0.75rem; }
+  .funnel-label { font-size: 0.72rem; }
+
+  /* Budget sliders: single column */
+  .budget-grid { grid-template-columns: 1fr; }
+
+  /* Micro options: single column on small screens */
+  .micro-options { grid-template-columns: 1fr; }
+
+  /* Ent questions: ensure text doesn't clip */
+  .ent-q { overflow: hidden; }
+  .bias-card { overflow: hidden; }
+
+  /* Insight choices */
+  .da-insights-options { overflow-x: hidden; }
+  .insight-choice { flex-wrap: nowrap; }
+
+  /* Label rows: stack buttons */
+  .lr-row { grid-template-columns: 1fr; }
+  .lr-btns { flex-wrap: wrap; gap: var(--s-2); }
+
+  /* Navbar timer: hide on very small screens */
+  .sim-timer { display: none; }
+
+  /* Complete screen */
+  .complete-title { font-size: 1.4rem; }
+  .complete-sub   { font-size: 0.88rem; }
+}
+
+@media (max-width: 480px) {
+  .sim-page { padding-top: 70px; }
+  .task-header { padding: var(--s-3) var(--s-4); }
+  .task-title  { font-size: 1rem; }
+  .task-desc   { font-size: 0.82rem; }
+  .metrics-grid { grid-template-columns: 1fr; }
+  .micro-options { grid-template-columns: 1fr; }
+  .ux-audit-grid { grid-template-columns: 1fr; }
+  .diff-hint { font-size: 0.75rem; }
 }
 
 /* ── Class aliases: simulation.js uses .chosen-* ─────────────
@@ -577,10 +667,13 @@
 .audit-item.correct-flag { background: var(--sage-l); border-color: var(--sage); }
 .audit-item.wrong-flag   { background: var(--rose-l); border-color: var(--rose); }
 
-/* code-line: JS applies .bug-flagged/.correct-find/.wrong-find */
-.code-line.bug-flagged  { background: rgba(248,113,113,0.12); border-left-color: #F87171; }
-.code-line.correct-find { background: rgba(134,196,144,0.12); border-left-color: var(--sage); }
-.code-line.wrong-find   { background: rgba(248,113,113,0.06); }
+/* code-line: JS applies .bug-flagged then .correct-find or .wrong-find
+   IMPORTANT: correct-find must OVERRIDE bug-flagged (red) → green
+   Use more specific selector to beat .bug-flagged specificity */
+.code-line.bug-flagged             { background: rgba(248,113,113,0.15); border-left-color: #F87171; }
+.code-line.bug-flagged.correct-find{ background: rgba(134,196,144,0.20) !important; border-left-color: var(--sage) !important; }
+.code-line.correct-find            { background: rgba(134,196,144,0.20); border-left-color: var(--sage); }
+.code-line.wrong-find              { background: rgba(248,113,113,0.10); border-left-color: rgba(248,113,113,0.4); }
 
 /* found-bug-item: used by FE sim */
 .found-bug-item { display: flex; gap: var(--s-2); align-items: flex-start; font-size: 0.78rem; background: var(--rose-l); color: #BE185D; border: 1px solid var(--rose); padding: var(--s-2) var(--s-3); border-radius: var(--r-md); }
