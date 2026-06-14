@@ -605,8 +605,8 @@
                 </div>
               </div>
               <div class="funnel-drop" style="color:#f87171">▼ 83% drop ⚠️</div>
-              <div class="funnel-stage" style="width:5%">
-                <div class="funnel-bar" style="background:rgba(244,63,94,0.8);width:100%">
+              <div class="funnel-stage" style="width:clamp(80px, 5%, 5%)">
+                <div class="funnel-bar" style="background:rgba(244,63,94,0.8);width:100%;min-width:80px">
                   <span class="funnel-label">Completed Purchase</span>
                   <span class="funnel-num">500</span>
                 </div>
@@ -614,7 +614,7 @@
             </div>
 
             <div class="da-insights-options">
-              <h4 style="margin-bottom:var(--s-4);font-size:0.9rem;color:rgba(240,238,255,0.6)">Select all observations that are valid:</h4>
+              <h4 class="section-label" style="margin-bottom:var(--s-4);font-size:0.9rem;">Select all observations that are valid:</h4>
               <div class="insight-choice" data-good="true" tabindex="0" role="checkbox" id="dai-1">
                 <div class="ic-check" aria-hidden="true">○</div>
                 <div>The biggest problem is checkout abandonment (83% drop) — this is where to focus first</div>
@@ -943,7 +943,7 @@
               <div class="bias-card card" data-biased="false" tabindex="0" id="bc-4">
                 <div class="bias-icon">🏆</div>
                 <h4>Pattern D</h4>
-                <p>The model ranks candidates with relevant GitHub contributions higher than those without for software engineering positions.</div>
+                <p>The model ranks candidates with relevant GitHub contributions higher than those without for software engineering positions.</p>
                 <div class="bias-tag">Is this bias?</div>
               </div>
             </div>
